@@ -9,4 +9,4 @@ GENRES
 - analyze the correlation between the quantity of comedy and drama movies and the wealth of a country
 
 OSCAR WINNERS
-- analyze the 
+- analyze the correlation
