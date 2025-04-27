@@ -16,5 +16,4 @@ OSCAR WINNERS
 - attori che diventano produttori e viceversa
 - attori che interpretano proprio omonimi
 - attori che se stessi 
-- comparazione tra numero di recensioni e rating, ottenuto eliminando i duplicati da movies
-- 
+- comparazione tra numero di recensioni e rating, ottenuto eliminando i duplicati da movies (fatto)
