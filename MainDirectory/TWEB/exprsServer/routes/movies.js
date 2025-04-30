@@ -5,12 +5,15 @@ const Movie = require('../models/movies');
  * dynamic query to get the movies we need
  */
 router.get('/', async (req, res) => {
-    const { ratingMin, year, name, page = 1, limit = 20, sort = 'rating', order = 'desc' } = req.query;
-
+    const { ratingMin, ratingMax,  year, name, minDuration,  page = 1, limit = 20, sort = 'rating', order = 'desc' } = req.query;
+    //build the filter with the options received
     const filter = {};
 
     if (ratingMin) {
         filter.rating = { $gte: parseFloat(ratingMin) };
+    }
+    if (ratingMax) {
+        filter.rating = { $lte: parseFloat(ratingMax) };
     }
 
     if (year) {
@@ -19,6 +22,9 @@ router.get('/', async (req, res) => {
 
     if (name) {
         filter.name = new RegExp(name, 'i'); // case-insensitive
+    }
+    if (minDuration) {
+        filter.minute = { $gte: parseInt(minDuration) };
     }
     //sort the results
     const sortOption = {};
