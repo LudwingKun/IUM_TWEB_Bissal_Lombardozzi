@@ -1,4 +1,48 @@
 package com.bissallombardozzi.springbootserver.Actor;
 
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+import jakarta.persistence.*;
+
+@RestController
+@RequestMapping("/actors")
 public class ActorController {
+    private final ActorService actorService;
+
+    public ActorController(ActorService actorService) {
+        this.actorService = actorService;
+    }
+
+    @GetMapping()
+    public List<Actor> getAllActors() {
+        return actorService.getAllActors();
+    }
+
+    @GetMapping("id/{id}")
+    public ResponseEntity<Actor> getActorById(@PathVariable Long id) {
+        Actor actor = actorService.getActorById(id);
+        if (actor != null) {
+            return ResponseEntity.ok(actor);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("name/{name}")
+    public ResponseEntity<List<Actor>> getActorByName(@PathVariable String name) {
+        List<Actor> actors = actorService.getActorByName(name);
+        if (actors != null && !actors.isEmpty()) {
+            return ResponseEntity.ok(actors);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

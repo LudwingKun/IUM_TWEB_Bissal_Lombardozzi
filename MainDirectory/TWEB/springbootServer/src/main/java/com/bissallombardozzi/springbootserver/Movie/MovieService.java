@@ -24,4 +24,7 @@ public class MovieService {
         return movieRepository.findById(id).orElse(null);
     }
 
+    public List<Movie> getTop5Movies() {
+        return movieRepository.findTop5ByOrderByRatingDesc().subList(0, 5);
+    }
 }

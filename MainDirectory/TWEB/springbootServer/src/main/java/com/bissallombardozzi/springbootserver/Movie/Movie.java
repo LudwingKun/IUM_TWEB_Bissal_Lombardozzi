@@ -24,7 +24,7 @@ public class Movie {
     @Column(name = "minute", nullable = false)
     private String filmDuration;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description", length = 10000, nullable = false)
     private String filmDescription;
 
     @Column(name= "rating", nullable = false)
