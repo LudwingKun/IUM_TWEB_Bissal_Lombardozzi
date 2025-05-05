@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista Film</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+<h1>Risultati della Ricerca</h1>
+
+{{#if movies.length}}
+    <p>numero di film : {{movies.length}}</p>
+    <ul>
+        {{#each movies}}
+            <li>
+                <a href="/movies/{{this.id}}">
+                    <strong>{{this.name}}</strong> ({{this.date}})
+                </a>
+                <br>
+                Rating: {{this.rating}}<br>
+                Durata: {{this.minute}} minuti
+            </li>
+        {{/each}}
+    </ul>
+{{else}}
+    <p>Nessun film trovato con i filtri selezionati.</p>
+{{/if}}
+
+<a href="/">Torna alla Home</a>
+</body>
+</html>

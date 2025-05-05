@@ -12,7 +12,7 @@ mongoose.connect(MONGODB_URI)
         //query no sql
         const movies = await Movie.find(undefined, undefined, undefined).limit(100);
 
-        console.log(`🎬 Trovati ${movies.length} film:\n`);
+        console.log(` Trovati ${movies.length} film:\n`);
         movies.forEach((movie, i) => {
             console.log(`${i + 1}. ${movie.name} (${movie.date}) - ⭐ ${movie.rating} - minute: ${movie.minute}`);
         });
