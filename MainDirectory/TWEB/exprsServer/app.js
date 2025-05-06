@@ -35,7 +35,11 @@ app.use(express.json());
  */
 const moviesRouter = require('./routes/movies.js');
 app.use('/api/movies', moviesRouter);
+const reviewsRouter = require('./routes/reviews.js');
+
+app.use('/api/reviews', reviewsRouter);
 const PORT = 3002;
+
 app.listen(PORT, () => {
     console.log(` Server MongoDB pronto su http://localhost:${PORT}`);
 });
