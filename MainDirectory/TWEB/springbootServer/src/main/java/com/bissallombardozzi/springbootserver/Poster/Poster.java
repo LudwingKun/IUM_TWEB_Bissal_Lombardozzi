@@ -8,7 +8,7 @@ public class Poster {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "link", nullable = false)
+    @Column(name = "link", nullable = false, length = 1000)
     private String link;
 
     public Long getId() { return id; }
