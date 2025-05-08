@@ -1,5 +1,8 @@
 package com.bissallombardozzi.springbootserver.Movie;
 
+import com.bissallombardozzi.springbootserver.ActorDetails.ActorDetails;
+import com.bissallombardozzi.springbootserver.Mapper.ActorMapper;
+import com.bissallombardozzi.springbootserver.MovieDetails.MoviesDetails;
 import jakarta.persistence.*;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,7 @@ public class MovieController {
     public MovieController(MovieService movieService) {
         this.movieService = movieService;
     }
+
 
     @GetMapping
     public List<Movie> getAllMovies() {

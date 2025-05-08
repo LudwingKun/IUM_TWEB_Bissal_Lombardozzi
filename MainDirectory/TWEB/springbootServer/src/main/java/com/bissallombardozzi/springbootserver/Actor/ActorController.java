@@ -1,5 +1,7 @@
 package com.bissallombardozzi.springbootserver.Actor;
 
+import com.bissallombardozzi.springbootserver.ActorDetails.ActorDetails;
+import com.bissallombardozzi.springbootserver.Mapper.ActorMapper;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +46,12 @@ public class ActorController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @Autowired
+    private ActorMapper actorMapper;
+    public ActorDetails getActorDetails(Long id) {
+        Actor actor = actorService.getActorById(id);
+        return actorMapper.toDto(actor);
     }
 }
