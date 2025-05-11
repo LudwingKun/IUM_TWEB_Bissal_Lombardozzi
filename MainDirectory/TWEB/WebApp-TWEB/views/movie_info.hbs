@@ -23,15 +23,18 @@
     </div>
 
     <div class="mt-4 text-end">
-        <span onclick="window.location.href='/reviews?movie_title={{movie.title}}'" style="cursor: pointer; color: blue;">Vedi Recensioni</span>
+        <button class="btn btn-warning ms-auto me-2" onclick="window.location.href='/reviews?movie_title={{movie.title}}'" style="cursor: pointer;">Vedi Recensioni</button>
     </div>
 
     <div class="mt-5">
-        <h4 class="text-warning">Actors</h4>
+        <h4 class="text-warning">Cast</h4>
         <ul class="list-group list-group-flush">
             {{#each movie.actors}}
-                <li class="list-group-item bg-secondary text-white">{{this.name}}</li>
+                <li class="list-group-item bg-secondary text-white">
+                    {{this.name}} as {{#if this.role}}{{this.role}}{{else}}<span style="font-style: italic">Unknown</span>{{/if}}
+                </li>
             {{/each}}
+
         </ul>
     </div>
 

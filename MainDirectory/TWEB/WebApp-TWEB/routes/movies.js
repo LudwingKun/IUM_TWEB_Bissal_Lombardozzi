@@ -15,19 +15,26 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/filters', async (req, res) => {
+router.get('search/results', async (req, res) => {
+    const { title, genre, rating } = req.query;
     try {
-        const response = await axios.get('http://localhost:3003/movies', {
-            params: req.query
-        });
+        let query = 'http://localhost:8082/movies?';
+        if (title) query += `title=${title}&`;
+        if (genre) query += `genre=${genre}&`;
+        if (rating) query += `rating=${rating}`;
 
-        const results = response.data.results || response.data;
-        res.render('movies_list', { movies: results });
+        const response = await axios.get(query);
+        const movies = response.data;
 
+        res.json(movies);
     } catch (error) {
         console.error(error);
-        res.status(500).send('Errore nella ricerca dei film');
+        res.status(500).json({ error: 'Errore nel recupero dei dati' });
     }
+});
+
+router.get('/search', async (req, res) => {
+    res.render('search');
 });
 
 router.get('/:id', async (req, res) => {
