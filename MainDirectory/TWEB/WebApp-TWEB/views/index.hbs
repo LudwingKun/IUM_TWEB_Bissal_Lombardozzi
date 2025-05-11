@@ -41,6 +41,10 @@
         .card-title {
             color: var(--mustard);
         }
+
+        .card-text {
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -56,23 +60,21 @@
                 <li class="nav-item"><a class="nav-link" href="">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Film</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Attori</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Contatti</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
 <main class="container py-4">
-    <h2 class="section-title">Top films per rating ⭐</h2>
+    <h2 class="section-title">Top films per rating</h2>
     <div class="row row-cols-1 row-cols-md-5 g-4">
         {{#each topMovies}}
             <div class="col">
-                <a href="/movies/{{this.id}}"></a>
                 <div class="card h-100">
-                    <img src="{{this.poster}}" class="card-img-top" alt="{{this.filmName}}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{this.filmName}}</h5>
-                        <p class="card-text">{{this.filmRating}}</p>
+                    <img src="{{this.posterUrl}}" class="card-img-top" alt="{{this.title}}">
+                    <div class="card-body" onclick="location.href='movies/{{this.id}}'">
+                        <h5 class="card-title">{{this.title}}</h5>
+                        <p class="card-text">Rating: {{this.rating}}</p>
                     </div>
                 </div>
                 </div>

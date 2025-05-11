@@ -1,4 +1,4 @@
-package com.bissallombardozzi.springbootserver.ActorDetails;
+package com.bissallombardozzi.springbootserver.Dto;
 
 
 public class ActorDetails {

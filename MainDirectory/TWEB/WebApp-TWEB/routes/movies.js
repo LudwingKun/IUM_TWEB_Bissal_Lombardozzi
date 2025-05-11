@@ -4,12 +4,20 @@ const axios = require('axios');
 
 
 router.get('/', async (req, res) => {
-    res.send('Hello from movies');
+    try {
+        const response = await axios.get('http://localhost:8082/movies');
+        const movies = response.data;
+        res.render('movies_list', {movies: movies});
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error');
+    }
 });
 
 router.get('/filters', async (req, res) => {
     try {
-        const response = await axios.get('http://localhost:3002/api/movies', {
+        const response = await axios.get('http://localhost:3003/movies', {
             params: req.query
         });
 
@@ -25,15 +33,12 @@ router.get('/filters', async (req, res) => {
 router.get('/:id', async (req, res) => {
     const id = req.params.id;
     try {
+        console.log(`Chiamata a Spring Boot: http://localhost:8082/movies/${id}`);
         //get movie_info
         const response = await axios.get(`http://localhost:8082/movies/${id}`);
+        console.log('Response:', response.data);
         const movie = response.data;
-        //get posterLink
-        const linkResponse = await axios.get(`http://localhost:8082/posters/${id}`);
-        const posterLink = linkResponse.data.link;
-
-        console.log(movie);
-        res.render('movie_info', { movie, posterLink });
+        res.render('movie_info', { movie: movie });
     } catch (error) {
         console.error('Errore durante la richiesta:', error.message);
         if (error.response) {

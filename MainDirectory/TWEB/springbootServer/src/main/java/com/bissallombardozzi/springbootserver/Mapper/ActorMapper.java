@@ -1,6 +1,6 @@
 package com.bissallombardozzi.springbootserver.Mapper;
 import com.bissallombardozzi.springbootserver.Actor.Actor;
-import com.bissallombardozzi.springbootserver.ActorDetails.ActorDetails;
+import com.bissallombardozzi.springbootserver.Dto.ActorDetails;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

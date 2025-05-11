@@ -2,45 +2,27 @@ const express = require('express');
 const router = express.Router();
 const Review = require('../models/reviews');
 
+// Route: GET /reviews?movie_title=NomeDelFilm
 router.get('/', async (req, res) => {
-    const { movieTitle, critic_name, startDate, endDate, keyword, page = 1, limit = 20 } = req.query;
-    const filter = {};
+    const movieTitle = req.query.movie_title;
 
-    if (movieTitle) {
-        filter.movieTitle = new RegExp(movieTitle, 'i'); // case-insensitive
-    }
-
-    if (critic_name) {
-        filter.critic_name = new RegExp(critic_name, );
-    }
-
-    if (startDate || endDate) {
-        filter.date = {};
-        if (startDate) filter.date.$gte = new Date(startDate);
-        if (endDate) filter.date.$lte = new Date(endDate);
-    }
-   //it is possible to search by keyword on the review content
-    if (keyword) {
-        filter.content = new RegExp(keyword, 'i');
+    console.log('Queryyyy:', movieTitle);
+    if (!movieTitle) {
+        return res.status(400).json({ message: 'Parametro movie_title mancante' });
     }
 
     try {
-        const reviews = await Review.find(filter)
-            .skip((page - 1) * limit)
-            .limit(parseInt(limit));
-
-        const total = await Review.countDocuments(filter);
-
-        res.json({
-            page: parseInt(page),
-            limit: parseInt(limit),
-            totalResults: total,
-            totalPages: Math.ceil(total / limit),
-            results: reviews
-        });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Errore durante il recupero delle recensioni' });
+        console.log('Invio richiesta al servizio recensioni con query:', req.query);
+        const reviews = await Review.find({ movie_title: movieTitle });
+        console.log('Recensioni:', reviews);
+        if (reviews.length > 0) {
+            res.json(reviews);
+        } else {
+            res.json([]);
+        }
+    } catch (error) {
+        console.error('Errore nel recupero delle recensioni:', error);
+        res.status(500).json({ message: 'Errore del server' });
     }
 });
 

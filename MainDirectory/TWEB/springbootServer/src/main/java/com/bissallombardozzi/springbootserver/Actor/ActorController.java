@@ -1,18 +1,14 @@
 package com.bissallombardozzi.springbootserver.Actor;
 
-import com.bissallombardozzi.springbootserver.ActorDetails.ActorDetails;
+import com.bissallombardozzi.springbootserver.Dto.ActorDetails;
 import com.bissallombardozzi.springbootserver.Mapper.ActorMapper;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import jakarta.persistence.*;
 
 @RestController
 @RequestMapping("/actors")
