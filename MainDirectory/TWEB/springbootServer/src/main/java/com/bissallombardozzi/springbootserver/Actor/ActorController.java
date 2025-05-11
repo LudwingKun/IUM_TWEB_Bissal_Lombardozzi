@@ -24,7 +24,7 @@ public class ActorController {
         return actorService.getAllActors();
     }
 
-    @GetMapping("id/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Actor> getActorById(@PathVariable Long id) {
         Actor actor = actorService.getActorById(id);
         if (actor != null) {

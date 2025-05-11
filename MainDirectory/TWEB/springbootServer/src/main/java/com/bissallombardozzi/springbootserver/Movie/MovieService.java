@@ -1,5 +1,8 @@
 package com.bissallombardozzi.springbootserver.Movie;
 
+import com.bissallombardozzi.springbootserver.Actor.Actor;
+import com.bissallombardozzi.springbootserver.Actor.ActorRepository;
+import com.bissallombardozzi.springbootserver.Dto.ActorDetails;
 import com.bissallombardozzi.springbootserver.Dto.MovieDetails;
 import com.bissallombardozzi.springbootserver.Dto.MoviesExtendedDetails;
 import com.bissallombardozzi.springbootserver.Poster.Poster;
@@ -14,11 +17,13 @@ public class MovieService {
 
     private final MovieRepository movieRepository;
     private final PosterRepository posterRepository;
+    private final ActorRepository actorRepository;
 
 
-    public MovieService(MovieRepository movieRepository, PosterRepository posterRepository) {
+    public MovieService(MovieRepository movieRepository, PosterRepository posterRepository, ActorRepository actorRepository) {
         this.movieRepository = movieRepository;
         this.posterRepository = posterRepository;
+        this.actorRepository = actorRepository;
     }
 
     public List<MovieDetails> getAllMovies() {
@@ -35,10 +40,11 @@ public class MovieService {
     }
 
     public MoviesExtendedDetails getMovieById(Long id) {
-        Movie m = movieRepository.findById(id).orElse(null);
-        Poster p = posterRepository.findById(id).orElse(null);
-        if (m != null) {
-            return new MoviesExtendedDetails(m, p);
+        Movie movie = movieRepository.findById(id).orElse(null);
+        Poster poster = posterRepository.findById(id).orElse(null);
+        List<ActorDetails> actors = actorRepository.findById_film(id);
+        if (movie != null) {
+            return new MoviesExtendedDetails(movie, poster, actors);
         } else {
             return null;
         }

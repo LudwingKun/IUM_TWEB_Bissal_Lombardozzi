@@ -21,7 +21,6 @@ logs/
 # Build output
 dist/
 build/
-public/
 
 # OS specific files
 .DS_Store

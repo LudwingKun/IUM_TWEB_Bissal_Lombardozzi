@@ -1,9 +1,12 @@
 package com.bissallombardozzi.springbootserver.Dto;
 
+import com.bissallombardozzi.springbootserver.Actor.Actor;
 import com.bissallombardozzi.springbootserver.Movie.Movie;
 import com.bissallombardozzi.springbootserver.Poster.Poster;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class MoviesExtendedDetails {
     private Long id;
@@ -19,13 +22,12 @@ public class MoviesExtendedDetails {
     private Double rating;
 
 
-    public MoviesExtendedDetails(Movie m, Poster p) {
+    public MoviesExtendedDetails(Movie m, Poster p, List<ActorDetails> actors) {
         this.id = m.getId();
         this.title = m.getFilmName();
         this.description = m.getFilmDescription();
         this.releaseDate = m.getFilmDate();
         this.rating = Double.parseDouble(m.getFilmRating());
-
         this.tagline = m.getFilmTagline();
         this.duration = m.getFilmDuration();
 
@@ -42,6 +44,7 @@ public class MoviesExtendedDetails {
 //        }
 
         this.posterUrl = p.getLink();
+        this.actors = actors;
     }
 
 
@@ -73,7 +76,9 @@ public class MoviesExtendedDetails {
     public void setPosterUrl(String posterUrl) { this.posterUrl = posterUrl; }
 
     public List<ActorDetails> getActors() { return actors; }
-    public void setActors(List<ActorDetails> actors) { this.actors = actors; }
+    public void setActors(List<ActorDetails> actors) {
+        this.actors = actors;
+    }
 
     public Double getRating() { return rating; }
     public void setRating(Double rating) { this.rating = rating; }
