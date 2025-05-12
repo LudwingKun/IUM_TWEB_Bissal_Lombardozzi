@@ -11,13 +11,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ActorRepository extends JpaRepository<Actor, Long> {
 
-    @Query("SELECT a FROM Actor a WHERE a.actorName = :name")
-    List<Actor> findByActorName(@Param("name") String name);
+//    @Query("SELECT new com.a FROM Actor a WHERE a.actorName = :name")
+//    List<ActorDetails> findByActorName(@Param("name") String name);
 
     @Query("SELECT a FROM Actor a WHERE a.actorName LIKE %:name%")
     List<Actor> findByActorNameContaining(@Param("name") String name);
 
-    @Query("SELECT new com.bissallombardozzi.springbootserver.Dto.ActorDetails(a.actorName, a.actorRole) FROM Actor a WHERE a.id_film = :movie_id")
-    List<ActorDetails> findById_film(@Param("movie_id") Long movie_id);
+//    @Query("SELECT new com.bissallombardozzi.springbootserver.Dto.ActorDetails(a.actorName, a.actorRole, ) FROM Actor a JOIN Movie m ON a.id_film=m.id WHERE a.id_film = :movie_id")
+//    List<ActorDetails> findById_film(@Param("movie_id") Long movie_id);
 
 }

@@ -24,16 +24,6 @@ public class ActorController {
         return actorService.getAllActors();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Actor> getActorById(@PathVariable Long id) {
-        Actor actor = actorService.getActorById(id);
-        if (actor != null) {
-            return ResponseEntity.ok(actor);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
     @GetMapping("name/{name}")
     public ResponseEntity<List<Actor>> getActorByName(@PathVariable String name) {
         List<Actor> actors = actorService.getActorByName(name);

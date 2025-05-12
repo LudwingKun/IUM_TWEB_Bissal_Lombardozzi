@@ -4,13 +4,15 @@ package com.bissallombardozzi.springbootserver.Dto;
 public class ActorDetails {
     private String name;
     private String role;
+    private MovieDetails movie;
 
     public ActorDetails() {
     }
 
-    public ActorDetails(String name, String role) {
+    public ActorDetails(String name, String role, MovieDetails movie) {
         this.name = name;
         this.role = role;
+        this.movie = movie;
     }
 
     public String getName() {
@@ -27,6 +29,14 @@ public class ActorDetails {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public MovieDetails getMovie() {
+        return movie;
+    }
+
+    public void setMovie(MovieDetails movie) {
+        this.movie = movie;
     }
 
 }
