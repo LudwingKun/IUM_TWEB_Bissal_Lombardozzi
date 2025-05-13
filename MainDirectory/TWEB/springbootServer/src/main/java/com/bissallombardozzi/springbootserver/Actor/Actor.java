@@ -11,7 +11,7 @@ public class Actor {
     private Long id;
 
     @Column(name = "id", nullable = false)
-    private Long id_film;
+    private Long filmId;
 
     @Column(name = "name", nullable = false)
     private String actorName;
@@ -23,7 +23,7 @@ public class Actor {
     }
 
     public Actor(Long id_film, String actorName, String actorRole) {
-        this.id_film = id_film;
+        this.filmId = id_film;
         this.actorName = actorName;
         this.actorRole = actorRole;
     }
@@ -37,11 +37,11 @@ public class Actor {
     }
 
     public Long getId_film() {
-        return id_film;
+        return filmId;
     }
 
     public void setId_film(Long id_film) {
-        this.id_film = id_film;
+        this.filmId = id_film;
     }
 
     public String getActorName() {

@@ -19,8 +19,8 @@ router.get('search/results', async (req, res) => {
     const { title, genre, rating } = req.query;
     try {
         let query = 'http://localhost:8082/movies?';
-        if (title) query += `title=${title}&`;
-        if (genre) query += `genre=${genre}&`;
+        if (title) query += `name=${title}&`;
+     //   if (genre) query += `genre=${genre}&`;
         if (rating) query += `rating=${rating}`;
 
         const response = await axios.get(query);

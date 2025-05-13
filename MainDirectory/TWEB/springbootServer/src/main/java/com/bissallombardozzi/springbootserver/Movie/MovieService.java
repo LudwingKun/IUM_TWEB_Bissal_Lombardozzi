@@ -42,8 +42,9 @@ public class MovieService {
     public MoviesExtendedDetails getMovieById(Long id) {
         Movie movie = movieRepository.findById(id).orElse(null);
         Poster poster = posterRepository.findById(id).orElse(null);
-        List<ActorDetails> actors = actorRepository.findById_film(id);
+        List<ActorDetails> actors = actorRepository.findByFilmId(id);
         if (movie != null) {
+            assert poster != null;
             return new MoviesExtendedDetails(movie, poster, actors);
         } else {
             return null;
@@ -60,6 +61,19 @@ public class MovieService {
                 movieDetailsList.add(movieDetails);
             }
         }
+        return movieDetailsList;
+    }
+
+    public List<MovieDetails> searchMovies(String title, String genre, Integer year, Double rating, String sort) {
+        List<Movie> movies = movieRepository.findMoviesByFilters(title, genre, year, rating, sort);
+
+        List<MovieDetails> movieDetailsList = new ArrayList<>();
+        for (Movie movie : movies) {
+            Poster poster = posterRepository.findById(movie.getId()).orElse(null);
+            MovieDetails movieDetails = new MovieDetails(movie, poster);
+            movieDetailsList.add(movieDetails);
+        }
+
         return movieDetailsList;
     }
 }

@@ -1,7 +1,6 @@
 package com.bissallombardozzi.springbootserver.Movie;
 
 import com.bissallombardozzi.springbootserver.Dto.MovieDetails;
-import com.bissallombardozzi.springbootserver.Movie.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +33,42 @@ public class MovieController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @Autowired
+    private MovieRepository movieRepository;
+
+/*
+    @GetMapping("/search")
+    public List<Movie> searchMovies(
+            @RequestParam(required = false) String title,
+            @RequestParam(required = false) String genre,
+            @RequestParam(required = false) Integer year,
+            @RequestParam(required = false) Double rating,
+            @RequestParam(required = false, defaultValue = "asc") String sort
+    ) {
+
+        return movieRepository.findMoviesByFilters(title, genre, year, rating, sort);
+    }
+*/
+@GetMapping("/search")
+public ResponseEntity<List<MovieDetails>> searchMovies(
+        @RequestParam(required = false) String title,
+        @RequestParam(required = false) String genre,
+        @RequestParam(required = false) Integer year,
+        @RequestParam(required = false) Double rating,
+        @RequestParam(required = false, defaultValue = "asc") String sort
+) {
+    List<MovieDetails> movies = movieService.searchMovies(title, genre, year, rating, sort);
+
+    if (movies != null && !movies.isEmpty()) {
+        return ResponseEntity.ok(movies);
+    } else {
+        return ResponseEntity.notFound().build();
+    }
+}
+
+
+
 
     @GetMapping("/top5movies")
     public List<MovieDetails> getTop5Movies() {

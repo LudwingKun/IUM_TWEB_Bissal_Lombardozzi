@@ -15,6 +15,11 @@ public class ActorDetails {
         this.movie = movie;
     }
 
+    public ActorDetails(String actorName, String actorRole) {
+        this.name = actorName;
+        this.role = actorRole;
+    }
+
     public String getName() {
         return name;
     }

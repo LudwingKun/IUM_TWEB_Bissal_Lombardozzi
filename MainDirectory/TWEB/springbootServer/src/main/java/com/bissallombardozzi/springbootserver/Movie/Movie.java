@@ -1,8 +1,10 @@
 package com.bissallombardozzi.springbootserver.Movie;
 
+import com.bissallombardozzi.springbootserver.Genres.Genre;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "movies")
@@ -27,8 +29,17 @@ public class Movie {
     @Column(name = "description", length = 10000, nullable = false)
     private String filmDescription;
 
-    @Column(name= "rating", nullable = false)
+    @Column(name = "rating", nullable = false)
     private String filmRating;
+
+    @ManyToMany
+    @JoinTable(
+            name = "genres", // Tabella di join
+            joinColumns = @JoinColumn(name = "id"), // Colonna di join che fa riferimento alla tabella Movie
+            inverseJoinColumns = @JoinColumn(name = "genre_id") // Colonna di join che fa riferimento alla tabella Genre
+    )
+    private Set<Genre> genres;
+
 
     public Movie() {
 
@@ -43,6 +54,7 @@ public class Movie {
         this.filmDescription = filmDescription;
         this.filmRating = filmRating;
     }
+
 
     public Long getId() {
         return id;
