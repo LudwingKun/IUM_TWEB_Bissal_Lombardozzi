@@ -7,7 +7,11 @@ import com.bissallombardozzi.springbootserver.Dto.MovieDetails;
 import com.bissallombardozzi.springbootserver.Dto.MoviesExtendedDetails;
 import com.bissallombardozzi.springbootserver.Poster.Poster;
 import com.bissallombardozzi.springbootserver.Poster.PosterRepository;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,15 +32,7 @@ public class MovieService {
 
     public List<MovieDetails> getAllMovies() {
         List<Movie> movies = movieRepository.findAll();
-        List<MovieDetails> movieDetailsList = new ArrayList<>();
-        for (Movie movie : movies) {
-            Poster poster = posterRepository.findById(movie.getId()).orElse(null);
-            if (poster != null) {
-                MovieDetails movieDetails = new MovieDetails(movie, poster);
-                movieDetailsList.add(movieDetails);
-            }
-        }
-        return movieDetailsList;
+        return getMovieDetails(movies);
     }
 
     public MoviesExtendedDetails getMovieById(Long id) {
@@ -53,6 +49,21 @@ public class MovieService {
 
     public List<MovieDetails> getTop5Movies() {
         List<Movie> movies = movieRepository.findTop5ByOrderByRatingDesc().subList(0, 5);
+        return getMovieDetails(movies);
+    }
+
+
+    public List<Movie> searchMovies(String genre, Integer year) {
+        Pageable pageable = PageRequest.of(0, 20);
+        return movieRepository.findMoviesByGenreAndYear(genre, year, pageable);
+    }
+
+    public List<MovieDetails> searchMovies(String filmName, Integer filmDate, Double rating, String genre) {
+        List<Movie> movies = movieRepository.findMovies(filmName, filmDate, rating, genre);
+        return getMovieDetails(movies);
+    }
+
+    private List<MovieDetails> getMovieDetails(List<Movie> movies) {
         List<MovieDetails> movieDetailsList = new ArrayList<>();
         for (Movie movie : movies) {
             Poster poster = posterRepository.findById(movie.getId()).orElse(null);
@@ -61,19 +72,6 @@ public class MovieService {
                 movieDetailsList.add(movieDetails);
             }
         }
-        return movieDetailsList;
-    }
-
-    public List<MovieDetails> searchMovies(String title, String genre, Integer year, Double rating, String sort) {
-        List<Movie> movies = movieRepository.findMoviesByFilters(title, genre, year, rating, sort);
-
-        List<MovieDetails> movieDetailsList = new ArrayList<>();
-        for (Movie movie : movies) {
-            Poster poster = posterRepository.findById(movie.getId()).orElse(null);
-            MovieDetails movieDetails = new MovieDetails(movie, poster);
-            movieDetailsList.add(movieDetails);
-        }
-
         return movieDetailsList;
     }
 }

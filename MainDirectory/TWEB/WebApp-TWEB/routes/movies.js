@@ -15,23 +15,24 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('search/results', async (req, res) => {
-    const { title, genre, rating } = req.query;
+/**
+ * for filtred movies
+ */
+router.get('/movies', async (req, res) => {
+    const {filmName,  filmDate, rating,  genre } = req.query;
+
     try {
-        let query = 'http://localhost:8082/movies?';
-        if (title) query += `name=${title}&`;
-     //   if (genre) query += `genre=${genre}&`;
-        if (rating) query += `rating=${rating}`;
-
-        const response = await axios.get(query);
-        const movies = response.data;
-
-        res.json(movies);
+        const response = await axios.get('http://localhost:8082/movies/search', {
+            params: { filmName, filmDate, rating, genre }
+        });
+        console.log('Dati ricevuti da Spring Boot:', response.data);
+        res.render('search', { movies: response.data });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Errore nel recupero dei dati' });
+        console.error('Errore nel proxy:', error.message);
+        res.status(500).json({ message: 'Errore nel recupero dei film' });
     }
 });
+
 
 router.get('/search', async (req, res) => {
     res.render('search');

@@ -2,36 +2,31 @@ package com.bissallombardozzi.springbootserver.Genres;
 
 
 
+import com.bissallombardozzi.springbootserver.Movie.Movie;
 import jakarta.persistence.*;
+import java.util.Set;
 
 @Entity
-@Table(name = "genres")
+@Table (name = "genres")
 public class Genre {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_unique")
-    private Long idUnique;
+    private Long id;
 
-    @Column(name = "id")
-    private Integer genre_id;
-    @Column(name = "genre")
     private String genre;
 
-    public Long getIdUnique() {
-        return idUnique;
+    @ManyToMany(mappedBy = "genres")
+    private Set<Movie> movies;
+
+    public Genre() {}
+
+    public Genre(String genre) {
+        this.genre = genre;
     }
 
-    public void setIdUnique(Long idUnique) {
-        this.idUnique = idUnique;
-    }
-
-    public Integer getId() {
-        return genre_id;
-    }
-
-    public void setId(Integer id) {
-        this.genre_id = id;
+    public Long getId() {
+        return id;
     }
 
     public String getGenre() {
@@ -40,5 +35,13 @@ public class Genre {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public Set<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(Set<Movie> movies) {
+        this.movies = movies;
     }
 }

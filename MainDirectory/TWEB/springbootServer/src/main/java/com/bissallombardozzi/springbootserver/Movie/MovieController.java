@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import com.bissallombardozzi.springbootserver.Dto.MoviesExtendedDetails;
 
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/movies")
 public class MovieController {
@@ -37,6 +37,15 @@ public class MovieController {
     @Autowired
     private MovieRepository movieRepository;
 
+    @GetMapping("/search")
+    public List<MovieDetails> getMovies(
+            @RequestParam(required = false) String filmName,
+            @RequestParam(required = false) Integer filmDate,
+            @RequestParam(required = false) Double rating,
+            @RequestParam(required = false) String genre) {
+
+        return movieService.searchMovies(filmName, filmDate, rating, genre);
+    }
 /*
     @GetMapping("/search")
     public List<Movie> searchMovies(
@@ -50,6 +59,7 @@ public class MovieController {
         return movieRepository.findMoviesByFilters(title, genre, year, rating, sort);
     }
 */
+/*
 @GetMapping("/search")
 public ResponseEntity<List<MovieDetails>> searchMovies(
         @RequestParam(required = false) String title,
@@ -66,6 +76,7 @@ public ResponseEntity<List<MovieDetails>> searchMovies(
         return ResponseEntity.notFound().build();
     }
 }
+*/
 
 
 

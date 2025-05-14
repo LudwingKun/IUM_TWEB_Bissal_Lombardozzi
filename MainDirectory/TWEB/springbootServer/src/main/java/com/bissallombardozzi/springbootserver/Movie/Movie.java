@@ -34,9 +34,9 @@ public class Movie {
 
     @ManyToMany
     @JoinTable(
-            name = "genres", // Tabella di join
-            joinColumns = @JoinColumn(name = "id"), // Colonna di join che fa riferimento alla tabella Movie
-            inverseJoinColumns = @JoinColumn(name = "genre_id") // Colonna di join che fa riferimento alla tabella Genre
+            name = "movie_genres",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id")
     )
     private Set<Genre> genres;
 

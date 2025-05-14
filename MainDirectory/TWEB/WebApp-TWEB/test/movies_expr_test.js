@@ -1,28 +1,31 @@
+const express = require('express');
 const axios = require('axios');
 
-async function testGetMovies() {
+const app = express();
+const port = 3002; // Porta del tuo server Express
+
+// Endpoint per recuperare i film
+app.get('/api/movies', async (req, res) => {
+    const { year, ratingMin, limit } = req.query;
+
     try {
-        const response = await axios.get('http://localhost:3002/api/movies', {
+        // Costruisci la query da passare al server Spring Boot sulla porta 8082
+        const response = await axios.get('http://localhost:8082/movies/search', {
             params: {
-                year: 2023,
-                ratingMin: 4,
-                limit: 10
+                year,        // Anno dei film
+                ratingMin,   // Rating minimo
+                limit        // Limite dei risultati
             }
         });
 
-        const movies = response.data.results;
-
-        console.log(` Film trovati: ${movies.length}`);
-        movies.forEach((movie, i) => {
-            console.log(`${i + 1}. ${movie.name} (${movie.date}) - Rating: ${movie.rating}`);
-        });
-
+        // Invia la risposta al client
+        res.json(response.data);
     } catch (error) {
-        console.error(' Errore nella richiesta:', error.message);
-        if (error.response) {
-            console.error('Dettagli:', error.response.data);
-        }
+        console.error('Errore nel recupero dei film:', error.message);
+        res.status(500).json({ message: 'Errore nel recupero dei film' });
     }
-}
+});
 
-testGetMovies();
+app.listen(port, () => {
+    console.log(`Server Express in ascolto sulla porta ${port}`);
+});
