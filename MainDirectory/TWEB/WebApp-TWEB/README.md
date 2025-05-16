@@ -2,7 +2,7 @@
 
 ## Configuration
 to start the whole project, we need the three Server online
-- in exprsServer run "app.s"
+- in exprsServer run "www"
 - in springbootServer start "SpringbootServerApplication"
 - in WebApp-TWEB start the "www" file
 

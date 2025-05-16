@@ -27,6 +27,42 @@ app.use('/users', usersRouter);
 app.use('/movies', movieRouter);
 app.use('/reviews', reviewsRouter);
 
+const hbs = require('hbs');
+
+hbs.registerHelper('encodeURI', str => encodeURIComponent(str));
+
+hbs.registerHelper('ifEquals', function (a, b, options) {
+  return a == b ? options.fn(this) : options.inverse(this);
+});
+
+hbs.registerHelper('add', (a, b) => a + b);
+
+hbs.registerHelper('subtract', (a, b) => a - b);
+
+hbs.registerHelper('range', function(from, to, options) {
+  let result = '';
+  for (let i = from; i <= to; i++) {
+    result += options.fn(i);
+  }
+  return result;
+});
+
+hbs.registerHelper('gt', function(a, b, options) {
+  if (typeof options === 'object' && typeof options.fn === 'function') {
+    return a > b ? options.fn(this) : options.inverse(this);
+  } else {
+    return a > b;
+  }
+});
+hbs.registerHelper('lt', function(a, b, options) {
+  return a < b;
+});
+hbs.registerHelper('queryString', function(params, page) {
+  const query = new URLSearchParams({...params, page}).toString();
+  return `?${query}`;
+});
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

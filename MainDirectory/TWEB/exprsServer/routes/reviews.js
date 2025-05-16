@@ -13,6 +13,7 @@ router.get('/', async (req, res) => {
 
     try {
         console.log('Invio richiesta al servizio recensioni con query:', req.query);
+        console.log('Recensioni:', movieTitle);
         const reviews = await Review.find({ movie_title: movieTitle });
         console.log('Recensioni:', reviews);
         if (reviews.length > 0) {

@@ -1,7 +1,9 @@
 package com.bissallombardozzi.springbootserver.Movie;
 
 import com.bissallombardozzi.springbootserver.Dto.MovieDetails;
+import com.bissallombardozzi.springbootserver.Dto.MoviePageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.bissallombardozzi.springbootserver.Dto.MoviesExtendedDetails;
@@ -38,13 +40,16 @@ public class MovieController {
     private MovieRepository movieRepository;
 
     @GetMapping("/search")
-    public List<MovieDetails> getMovies(
+    public ResponseEntity<MoviePageDTO> searchMovies(
             @RequestParam(required = false) String filmName,
             @RequestParam(required = false) Integer filmDate,
             @RequestParam(required = false) Double rating,
-            @RequestParam(required = false) String genre) {
+            @RequestParam(required = false) String genre,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size) {
 
-        return movieService.searchMovies(filmName, filmDate, rating, genre);
+        Page<MovieDetails> result = movieService.searchMovies(filmName, filmDate, rating, genre, page, size);
+        return ResponseEntity.ok(new MoviePageDTO(result));
     }
 /*
     @GetMapping("/search")

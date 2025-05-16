@@ -8,6 +8,7 @@ import com.bissallombardozzi.springbootserver.Dto.MoviesExtendedDetails;
 import com.bissallombardozzi.springbootserver.Poster.Poster;
 import com.bissallombardozzi.springbootserver.Poster.PosterRepository;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -58,11 +59,12 @@ public class MovieService {
         return movieRepository.findMoviesByGenreAndYear(genre, year, pageable);
     }
 
-    public List<MovieDetails> searchMovies(String filmName, Integer filmDate, Double rating, String genre) {
-        List<Movie> movies = movieRepository.findMovies(filmName, filmDate, rating, genre);
-        return getMovieDetails(movies);
-    }
-
+    /*
+        public List<MovieDetails> searchMovies(String filmName, Integer filmDate, Double rating, String genre) {
+            List<Movie> movies = movieRepository.findMovies(filmName, filmDate, rating, genre);
+            return getMovieDetails(movies);
+        }
+    */
     private List<MovieDetails> getMovieDetails(List<Movie> movies) {
         List<MovieDetails> movieDetailsList = new ArrayList<>();
         for (Movie movie : movies) {
@@ -73,5 +75,16 @@ public class MovieService {
             }
         }
         return movieDetailsList;
+    }
+
+    public Page<MovieDetails> searchMovies(String filmName, Integer filmDate, Double rating, String genre, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Movie> moviePage = movieRepository.findMovies(filmName, filmDate, rating, genre, pageable);
+
+        return moviePage.map(movie -> {
+            Poster poster = posterRepository.findById(movie.getId()).orElse(null);
+            return new MovieDetails(movie, poster);
+        });
+
     }
 }

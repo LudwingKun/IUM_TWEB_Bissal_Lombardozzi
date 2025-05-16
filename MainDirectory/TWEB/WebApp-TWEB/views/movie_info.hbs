@@ -23,7 +23,7 @@
     </div>
 
     <div class="mt-4 text-end">
-        <button class="btn btn-warning ms-auto me-2" onclick="window.location.href='/reviews?movie_title={{movie.title}}'" style="cursor: pointer;">Vedi Recensioni</button>
+        <button class="btn btn-warning ms-auto me-2" onclick="window.location.href='/reviews?movie_title={{encodeURI movie.title}}'" style="cursor: pointer;">Vedi Recensioni</button>
     </div>
 
     <div class="mt-5">
