@@ -29,7 +29,7 @@ router.get('/movies', async (req, res) => {
 
     try {
         const response = await axios.get('http://localhost:8082/movies/search', {
-            params: {filmName, filmDate, rating, genre, page, limit: 20}
+            params: {filmName, filmDate, rating, genre, page, limit: 50}
         });
         console.log('Dati ricevuti da Spring Boot:', response.data);
 

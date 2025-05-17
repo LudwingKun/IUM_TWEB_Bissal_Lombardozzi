@@ -1,13 +1,11 @@
 package com.bissallombardozzi.springbootserver.Movie;
 
-import com.bissallombardozzi.springbootserver.Actor.Actor;
 import com.bissallombardozzi.springbootserver.Actor.ActorRepository;
 import com.bissallombardozzi.springbootserver.Dto.ActorDetails;
 import com.bissallombardozzi.springbootserver.Dto.MovieDetails;
 import com.bissallombardozzi.springbootserver.Dto.MoviesExtendedDetails;
 import com.bissallombardozzi.springbootserver.Poster.Poster;
 import com.bissallombardozzi.springbootserver.Poster.PosterRepository;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.PageRequest;
@@ -54,10 +52,12 @@ public class MovieService {
     }
 
 
+/*
     public List<Movie> searchMovies(String genre, Integer year) {
         Pageable pageable = PageRequest.of(0, 20);
         return movieRepository.findMoviesByGenreAndYear(genre, year, pageable);
     }
+*/
 
     /*
         public List<MovieDetails> searchMovies(String filmName, Integer filmDate, Double rating, String genre) {
@@ -77,12 +77,13 @@ public class MovieService {
         return movieDetailsList;
     }
 
-    public Page<MovieDetails> searchMovies(String filmName, Integer filmDate, Double rating, String genre, int page, int size) {
+    public Page<MovieDetails> searchMovies(String filmName, String filmDate, Double rating, String genre, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Movie> moviePage = movieRepository.findMovies(filmName, filmDate, rating, genre, pageable);
 
         return moviePage.map(movie -> {
             Poster poster = posterRepository.findById(movie.getId()).orElse(null);
+            assert poster != null;
             return new MovieDetails(movie, poster);
         });
 

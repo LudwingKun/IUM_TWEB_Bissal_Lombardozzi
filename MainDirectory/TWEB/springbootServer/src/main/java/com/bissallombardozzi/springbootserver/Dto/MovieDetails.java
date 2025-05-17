@@ -8,7 +8,7 @@ public class MovieDetails {
     private String posterUrl;
     private String releaseDate;
     private String tagline;
-    private String rating;
+    private float rating;
 
     public MovieDetails(Movie movie, Poster poster) {
         this.id = movie.getId();
@@ -59,11 +59,11 @@ public class MovieDetails {
         this.tagline = tagline;
     }
 
-    public String getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(String rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 }
