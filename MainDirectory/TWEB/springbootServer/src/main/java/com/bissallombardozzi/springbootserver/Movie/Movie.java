@@ -41,13 +41,13 @@ public class Movie {
     )
     private Set<Genre> genres;
 
-    @ManyToMany
-    @JoinTable(
-            name = "languages",
-            joinColumns = @JoinColumn(name = "id"),
-            inverseJoinColumns = @JoinColumn(name = "language_id")
-    )
-    private Set<Language> languages;
+//    @ManyToMany
+//    @JoinTable(
+//            name = "languages",
+//            joinColumns = @JoinColumn(name = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "language_id")
+//    )
+//    private Set<Language> languages;
 
 
     public Movie() {

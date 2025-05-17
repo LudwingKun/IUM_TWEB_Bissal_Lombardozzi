@@ -51,5 +51,20 @@
             </ul>
         </div>
     {{/if}}
+
+
+    <hr>
+    <h4 class="text-warning">Fan chat for: {{movie.title}}</h4>
+    <div id="chat-box" data-movie="{{movie.title}}">
+        <div id="messages" class="mb-3 border p-3 bg-light text-dark" style="height: 300px; overflow-y: auto;"></div>
+        <form id="chat-form" class="d-flex gap-2">
+            <input id="chat-input" class="form-control" placeholder="Type a message...">
+            <button class="btn btn-warning" type="submit">Send</button>
+        </form>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/public/js/chat.js"></script>
+
 </div>
 </body>

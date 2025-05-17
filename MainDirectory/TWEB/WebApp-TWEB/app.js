@@ -11,7 +11,7 @@ var movieRouter = require('./routes/movies');
 var reviewsRouter = require('./routes/reviews');
 
 var app = express();
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/public', express.static(path.join(__dirname, 'public')))
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
