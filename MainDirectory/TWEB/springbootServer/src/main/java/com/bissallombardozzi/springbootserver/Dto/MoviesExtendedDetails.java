@@ -20,7 +20,7 @@ public class MoviesExtendedDetails {
     private List<String> languages;
     private String posterUrl;
     private List<ActorDetails> actors;
-    private Double rating;
+    private float rating;
 
 
     public MoviesExtendedDetails(Movie m, Poster p, List<ActorDetails> actors) {
@@ -28,7 +28,7 @@ public class MoviesExtendedDetails {
         this.title = m.getFilmName();
         this.description = m.getFilmDescription();
         this.releaseDate = m.getFilmDate();
-        this.rating = Double.parseDouble(m.getFilmRating());
+        this.rating = m.getFilmRating();
         this.tagline = m.getFilmTagline();
         this.duration = m.getFilmDuration();
 
@@ -83,6 +83,6 @@ public class MoviesExtendedDetails {
         this.actors = actors;
     }
 
-    public Double getRating() { return rating; }
-    public void setRating(Double rating) { this.rating = rating; }
+    public float getRating() { return rating; }
+    public void setRating(float rating) { this.rating = rating; }
 }

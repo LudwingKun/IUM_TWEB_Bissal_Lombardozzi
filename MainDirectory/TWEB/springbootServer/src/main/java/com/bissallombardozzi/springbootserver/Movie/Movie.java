@@ -31,7 +31,7 @@ public class Movie {
     private String filmDescription;
 
     @Column(name = "rating", nullable = false)
-    private String filmRating;
+    private float filmRating;
 
     @ManyToMany
     @JoinTable(
@@ -54,7 +54,7 @@ public class Movie {
 
     }
 
-    public Movie(Long id_film, String filmName, String filmDate, String filmTagline, String filmDuration, String filmDescription, String filmRating) {
+    public Movie(Long id_film, String filmName, String filmDate, String filmTagline, String filmDuration, String filmDescription, float filmRating) {
         this.id = id_film;
         this.filmName = filmName;
         this.filmDate = filmDate;
@@ -113,11 +113,11 @@ public class Movie {
         this.filmDescription = filmDescription;
     }
 
-    public String getFilmRating() {
+    public float getFilmRating() {
         return filmRating;
     }
 
-    public void setFilmRating(String filmRating) {
+    public void setFilmRating(float filmRating) {
         this.filmRating = filmRating;
     }
 

@@ -42,7 +42,7 @@ public class MovieController {
     @GetMapping("/search")
     public ResponseEntity<MoviePageDTO> searchMovies(
             @RequestParam(required = false) String filmName,
-            @RequestParam(required = false) Integer filmDate,
+            @RequestParam(required = false) String filmDate,
             @RequestParam(required = false) Double rating,
             @RequestParam(required = false) String genre,
             @RequestParam(defaultValue = "0") int page,
