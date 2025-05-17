@@ -1,6 +1,7 @@
 package com.bissallombardozzi.springbootserver.Dto;
 
 import com.bissallombardozzi.springbootserver.Actor.Actor;
+import com.bissallombardozzi.springbootserver.Genres.Genre;
 import com.bissallombardozzi.springbootserver.Movie.Movie;
 import com.bissallombardozzi.springbootserver.Poster.Poster;
 
@@ -31,11 +32,13 @@ public class MoviesExtendedDetails {
         this.tagline = m.getFilmTagline();
         this.duration = m.getFilmDuration();
 
-//        if (m.getFilmGenres() == null) {
-//            this.genres = List.of();
-//        } else {
-//            this.genres = List.of(m.getFilmGenres().split(",")); // supponendo ci sia un campo stringa con i generi separati da virgole
-//        }
+        if (m.getGenres() == null) {
+            this.genres = List.of();
+        } else {
+            this.genres = m.getGenres().stream()
+                    .map(Genre::getGenre)
+                    .collect(Collectors.toList());
+        }
 
 //        if (m.getFilmLanguages() == null) {
 //            this.languages = List.of();

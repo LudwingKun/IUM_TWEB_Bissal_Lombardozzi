@@ -1,6 +1,7 @@
 package com.bissallombardozzi.springbootserver.Movie;
 
 import com.bissallombardozzi.springbootserver.Genres.Genre;
+import com.bissallombardozzi.springbootserver.Language.Language;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -40,6 +41,14 @@ public class Movie {
     )
     private Set<Genre> genres;
 
+    @ManyToMany
+    @JoinTable(
+            name = "languages",
+            joinColumns = @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "language_id")
+    )
+    private Set<Language> languages;
+
 
     public Movie() {
 
@@ -63,7 +72,6 @@ public class Movie {
     public void setId(Long id) {
         this.id = id;
     }
-
 
     public String getFilmName() {
         return filmName;
@@ -111,6 +119,14 @@ public class Movie {
 
     public void setFilmRating(String filmRating) {
         this.filmRating = filmRating;
+    }
+
+    public Set<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(Set<Genre> genres) {
+        this.genres = genres;
     }
 
 }

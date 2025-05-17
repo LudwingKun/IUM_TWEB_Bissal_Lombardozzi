@@ -12,6 +12,9 @@
         </div>
         <div class="col-md-8">
             <h2 class="text-warning">{{movie.title}} ({{movie.releaseDate}})</h2>
+            <br>
+            <p class="mb-2" style="font-style: italic"><span>{{movie.tagline}}</span></p>
+            <br>
             <p class="mb-2"><span class="fw-semibold text-warning">Rating:</span> {{movie.rating}}</p>
             <p><span class="fw-semibold text-warning">Duration:</span> {{movie.duration}}'</p>
             <p><span class="fw-semibold text-warning">Language:</span> {{movie.languages}}</p>
@@ -23,7 +26,7 @@
     </div>
 
     <div class="mt-4 text-end">
-        <button class="btn btn-warning ms-auto me-2" onclick="window.location.href='/reviews?movie_title={{encodeURI movie.title}}'" style="cursor: pointer;">Vedi Recensioni</button>
+        <button class="btn btn-warning ms-auto me-2" onclick="window.location.href='/reviews?movie_title={{encodeURI movie.title}}'" style="cursor: pointer;">Reviews</button>
     </div>
 
     <div class="mt-5">

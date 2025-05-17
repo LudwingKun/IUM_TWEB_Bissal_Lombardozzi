@@ -34,6 +34,11 @@ public class ActorController {
         }
     }
 
+//    @GetMapping("name/{name}")
+//    public ResponseEntity<List<Actor>> getActorByName(@PathVariable String name, @PathVariable int filmId) {
+//
+//    }
+
     @Autowired
     private ActorMapper actorMapper;
     public ActorDetails getActorDetails(Long id) {
