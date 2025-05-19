@@ -67,7 +67,7 @@
 </nav>
 
 <main class="container py-4">
-    <h2 class="section-title">Top films per rating</h2>
+    <h2 class="section-title">Best movies per rating</h2>
     <div class="row row-cols-1 row-cols-md-5 g-4">
         {{#each topMovies}}
             <div class="col">
@@ -82,14 +82,31 @@
         {{/each}}
     </div>
 
-    <h2 class="section-title mt-5">🏆 Ultimi 5 Premi Oscar</h2>
+    <h2 class="section-title mt-5">Latest Oscars</h2>
     <ul class="list-group list-group-flush">
         {{#each oscars}}
             <li class="list-group-item bg-dark text-white border-warning">
-                <strong>{{this.category}}:</strong> {{this.winner}} ({{this.movie}})
+                <strong>{{this.year}}:</strong> {{this.winner}} ({{this.movie}})
             </li>
         {{/each}}
     </ul>
+
+
+
+    <h2 class="section-title mt-5">Movies suggestions</h2>
+    <div class="row row-cols-1 row-cols-md-5 g-4">
+        {{#each suggestedMovies}}
+            <div class="col">
+                <div class="card h-100">
+                    <img src="{{this.posterUrl}}" class="card-img-top" alt="{{this.title}}">
+                    <div class="card-body" onclick="location.href='movies/{{this.id}}'">
+                        <h5 class="card-title">{{this.title}}</h5>
+                        <p class="card-text">Rating: {{this.rating}}</p>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

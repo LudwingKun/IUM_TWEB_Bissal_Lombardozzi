@@ -9,6 +9,7 @@ var indexRouter = require('./routes');
 var usersRouter = require('./routes/users');
 var movieRouter = require('./routes/movies');
 var reviewsRouter = require('./routes/reviews');
+var oscarsRouter = require('./routes/oscars');
 
 var app = express();
 app.use('/public', express.static(path.join(__dirname, 'public')))
@@ -26,8 +27,13 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/movies', movieRouter);
 app.use('/reviews', reviewsRouter);
+app.use('/oscars', oscarsRouter);
 
 const hbs = require('hbs');
+
+hbs.registerHelper('isArray', function(value) {
+  return Array.isArray(value);
+});
 
 hbs.registerHelper('encodeURI', str => encodeURIComponent(str));
 
