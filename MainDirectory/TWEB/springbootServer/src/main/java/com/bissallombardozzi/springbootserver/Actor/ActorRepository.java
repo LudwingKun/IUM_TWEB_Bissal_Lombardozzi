@@ -39,4 +39,11 @@ public interface ActorRepository extends JpaRepository<Actor, Long> {
                 WHERE a.actorName = :name
            """)
     List<Actor> findByActorName(@Param("name") String name);
+
+    @Query("""
+    SELECT new com.bissallombardozzi.springbootserver.Dto.ActorDetails(a.actorName, a.actorRole)
+    FROM Actor a
+    WHERE a.movie.id = :id
+""")
+    List<ActorDetails> findByFilmId(Long id);
 }

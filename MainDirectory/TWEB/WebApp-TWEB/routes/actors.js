@@ -1,15 +1,15 @@
 const express = require('express');
 const axios = require('axios');
 const router = express.Router();
-router.get('/actors/name', async (req, res) => {
-    const actorName = req.query.name; // oppure req.params.name se usi /:name
-
+router.get('/:name', async (req, res) => {
+    const actorName = req.params.name; // oppure req.params.name se usi /:name
+    console.log(`Chiamata a Spring Boot: http://localhost:8082/actors/${encodeURIComponent(actorName)}/movies`);
     try {
         const response = await axios.get(`http://localhost:8082/actors/${encodeURIComponent(actorName)}/movies`);
-
+        console.log('OK - Dati ricevuti da Spring Boot:');
         const movies = response.data;
 
-        res.render('actor-movies', {
+        res.render('actor_movies', {
             name: actorName,
             movies: movies
         });
