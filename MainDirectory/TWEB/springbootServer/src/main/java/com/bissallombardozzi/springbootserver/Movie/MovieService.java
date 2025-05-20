@@ -58,7 +58,7 @@ public class MovieService {
     }
 
     public List<MovieDetails> getTop5Movies() {
-        List<Movie> movies = movieRepository.findTop5ByOrderByRatingDesc().subList(0, 5);
+        List<Movie> movies = movieRepository.findTop5ByOrderByRatingDesc();
         return getMovieDetails(movies);
     }
 
@@ -86,6 +86,11 @@ public class MovieService {
             }
         }
         return movieDetailsList;
+    }
+
+    public List<MovieDetails> get5RandomMovies() {
+        List<Movie> movies = movieRepository.findRandomMovies();
+        return getMovieDetails(movies);
     }
 
     public Page<MovieDetails> searchMovies(String filmName, String filmDate, Double rating, String genre, String sort, String order, int page, int size) {

@@ -13,9 +13,11 @@ import org.springframework.stereotype.Repository;
 public interface MovieRepository extends JpaRepository<Movie, Long> {
 
 
-    @Query("SELECT m FROM Movie m WHERE m.filmRating IS NOT NULL ORDER BY m.filmRating DESC")
+    @Query(value = "SELECT * FROM movies WHERE rating IS NOT NULL ORDER BY rating DESC LIMIT 5", nativeQuery = true)
     List<Movie> findTop5ByOrderByRatingDesc();
 
+    @Query(value = "SELECT * FROM movies ORDER BY RANDOM() LIMIT 5", nativeQuery = true)
+    List<Movie> findRandomMovies();
 
     @Query("SELECT m FROM Movie m JOIN m.genres g WHERE g.genre = :genre AND m.filmDate = :year ORDER BY m.id ASC")
     List<Movie> findMoviesByGenreAndYear(@Param("genre") String genre, @Param("year") int year, Pageable pageable);

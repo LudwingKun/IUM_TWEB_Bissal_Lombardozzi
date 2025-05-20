@@ -48,10 +48,9 @@
     </style>
 </head>
 <body>
-<!-- Header & Navbar -->
 <nav class="navbar navbar-expand-lg">
     <div class="container">
-        <a class="navbar-brand" href="#">🎬 MovieHub</a>
+        <a class="navbar-brand" href="#">MoviesLove</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
         </button>
@@ -107,10 +106,14 @@
         {{#each suggestedMovies}}
             <div class="col">
                 <div class="card h-100">
-                    <img src="{{this.posterUrl}}" class="card-img-top" alt="{{this.title}}">
-                    <div class="card-body" onclick="location.href='movies/{{this.id}}'">
+                    {{#if this.posterUrl}}
+                        <img src="{{this.posterUrl}}" class="card-img-top" alt="{{this.title}}">
+                    {{else}}
+                        <img src="../public/images/question-mark.png" class="card-img-top" alt="Poster non disponibile" style="object-fit: cover; width: 100%; height: 100%;">
+                    {{/if}}
+                    <div class="card-body" onclick="location.href='movies/{{this.id}}'" style="cursor: pointer;">
                         <h5 class="card-title">{{this.title}}</h5>
-                        <p class="card-text">Rating: {{this.rating}}</p>
+                        <p class="card-text">Rating: {{#if this.rating}}{{this.rating}}{{else}}Unknown{{/if}}</p>
                     </div>
                 </div>
             </div>
