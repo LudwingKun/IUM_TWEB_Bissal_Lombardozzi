@@ -59,6 +59,11 @@ public class MovieController {
         return movieService.getTop5Movies();
     }
 
+    @GetMapping("/random5movies")
+    public List<MovieDetails> get5RandomMovies() {
+        return movieService.get5RandomMovies();
+    }
+
 
 
 

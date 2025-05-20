@@ -10,8 +10,10 @@ router.get('/', async function(req, res, next) {
         const topMovies = movies.data;
         const oscars = await axios.get('http://localhost:8082/oscars/latest5');
         const latestOscars = oscars.data;
-        console.log(latestOscars);
-        res.render('index', { title: 'MovieHub', topMovies: topMovies , latestOscars: latestOscars});
+        const random_movies = await axios.get('http://localhost:8082/movies/random5movies');
+        const suggestedMovies = random_movies.data;
+        console.log('randomMovies:', suggestedMovies);
+        res.render('index', { title: 'MovieHub', topMovies: topMovies , latestOscars: latestOscars, suggestedMovies: suggestedMovies});
     } catch (error) {
         console.error('Error:', error);
         res.status(500).send('Error loading top movies');
