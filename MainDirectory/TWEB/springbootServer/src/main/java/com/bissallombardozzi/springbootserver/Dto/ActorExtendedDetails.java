@@ -8,15 +8,17 @@ public class ActorExtendedDetails {
     private Map<String, String> rolesPlayed;
     private int numberOfOscars;
     private List<String> oscarAwards;
+    private List<MovieDetails> movies;
 
     public ActorExtendedDetails() {
     }
 
-    public ActorExtendedDetails(String name, Map<String, String> rolesPlayed, int numberOfOscars, List<String> oscarAwards) {
+    public ActorExtendedDetails(String name, Map<String, String> rolesPlayed, int numberOfOscars, List<String> oscarAwards,  List<MovieDetails> movies) {
         this.name = name;
         this.rolesPlayed = rolesPlayed;
         this.numberOfOscars = numberOfOscars;
         this.oscarAwards = oscarAwards;
+        this.movies = movies;
     }
 
     public String getName() {
@@ -49,5 +51,13 @@ public class ActorExtendedDetails {
 
     public void setOscarAwards(List<String> oscarAwards) {
         this.oscarAwards = oscarAwards;
+    }
+
+    public List<MovieDetails> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(List<MovieDetails> movies) {
+        this.movies = movies;
     }
 }

@@ -1,7 +1,9 @@
 package com.bissallombardozzi.springbootserver.Actor;
 
+import com.bissallombardozzi.springbootserver.Movie.Movie;
 import jakarta.persistence.*;
 
+import java.util.List;
 @Entity
 @Table(name = "actors")
 public class Actor {
@@ -10,8 +12,9 @@ public class Actor {
     @Column(name = "id_unique", nullable = false)
     private Long id;
 
-    @Column(name = "id", nullable = false)
-    private Long filmId;
+    @ManyToOne
+    @JoinColumn(name = "movie_id", referencedColumnName = "id", nullable = false)
+    private Movie movie;
 
     @Column(name = "name", nullable = false)
     private String actorName;
@@ -19,11 +22,10 @@ public class Actor {
     @Column(name = "role", nullable = false)
     private String actorRole;
 
-    public Actor() {
-    }
+    public Actor() {}
 
-    public Actor(Long id_film, String actorName, String actorRole) {
-        this.filmId = id_film;
+    public Actor(Movie movie, String actorName, String actorRole) {
+        this.movie = movie;
         this.actorName = actorName;
         this.actorRole = actorRole;
     }
@@ -36,12 +38,12 @@ public class Actor {
         this.id = id;
     }
 
-    public Long getId_film() {
-        return filmId;
+    public Movie getMovie() {
+        return movie;
     }
 
-    public void setId_film(Long id_film) {
-        this.filmId = id_film;
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 
     public String getActorName() {

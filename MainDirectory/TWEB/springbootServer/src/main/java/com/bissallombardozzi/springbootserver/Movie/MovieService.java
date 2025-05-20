@@ -40,7 +40,7 @@ public class MovieService {
     public MoviesExtendedDetails getMovieById(Long id) {
         Movie movie = movieRepository.findById(id).orElse(null);
         Poster poster = posterRepository.findById(id).orElse(null);
-        List<ActorDetails> actors = actorRepository.findByFilmId(id);
+        List<ActorDetails> actors = actorRepository.findByMovieId(id);
         List<String> languages = new ArrayList<>();
 
         if (movie != null && movie.getLanguages() != null) {

@@ -8,6 +8,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes');
 var usersRouter = require('./routes/users');
 var movieRouter = require('./routes/movies');
+var actorsRouter = require('./routes/actors');
 var reviewsRouter = require('./routes/reviews');
 var oscarsRouter = require('./routes/oscars');
 
@@ -26,6 +27,7 @@ app.use(cookieParser());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/movies', movieRouter);
+app.use('/actors', actorsRouter);
 app.use('/reviews', reviewsRouter);
 app.use('/oscars', oscarsRouter);
 
@@ -71,6 +73,7 @@ hbs.registerHelper('queryString', function(params, page) {
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
+  console.log(" SEI TU VERO ????404");
   next(createError(404));
 });
 
