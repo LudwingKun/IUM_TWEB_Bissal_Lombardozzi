@@ -6,6 +6,7 @@ import com.bissallombardozzi.springbootserver.Movie.Movie;
 import com.bissallombardozzi.springbootserver.Poster.Poster;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class MoviesExtendedDetails {
@@ -16,13 +17,13 @@ public class MoviesExtendedDetails {
     private String duration;
     private String releaseDate;
     private List<String> genres;
-    private List<String> languages;
+    private Set<String> languages;
     private String posterUrl;
     private List<ActorDetails> actors;
     private Double rating;
 
 
-    public MoviesExtendedDetails(Movie m, Poster p, List<ActorDetails> actors, List<String> languages) {
+    public MoviesExtendedDetails(Movie m, Poster p, List<ActorDetails> actors, Set<String> languages) {
         this.id = m.getId();
         this.title = m.getFilmName();
         this.description = m.getFilmDescription();
@@ -39,12 +40,6 @@ public class MoviesExtendedDetails {
                     .map(Genre::getGenre)
                     .collect(Collectors.toList());
         }
-
-//        if (m.getFilmLanguages() == null) {
-//            this.languages = List.of();
-//        } else {
-//            this.languages = List.of(m.getFilmLanguages().split(",")); // idem per le lingue
-//        }
 
         this.posterUrl = p.getLink();
         this.actors = actors;
@@ -83,11 +78,11 @@ public class MoviesExtendedDetails {
 
     public Double getRating() { return rating; }
 
-    public List<String> getLanguages() {
+    public Set<String> getLanguages() {
         return languages;
     }
 
-    public void setLanguages(List<String> languages) {
+    public void setLanguages(Set<String> languages) {
         this.languages = languages;
     }
 

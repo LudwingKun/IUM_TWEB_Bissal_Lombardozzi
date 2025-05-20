@@ -16,5 +16,7 @@ public interface OscarRepository extends JpaRepository<Oscar, Long> {
     @Query("SELECT o FROM Oscar o WHERE o.ceremonyEdition = :edition")
     List<Oscar> findByCeremony(int edition);
 
+    @Query(value = "SELECT DISTINCT ON (ceremony) * FROM oscar_awards WHERE ceremony<93 ORDER BY ceremony DESC, year_ceremony DESC LIMIT 5", nativeQuery = true)
+    List<Oscar> findTop5CeremonyDistinctOrderByYearCeremonyDesc();
 
 }
