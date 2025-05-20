@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,13 +41,13 @@ public class MovieService {
     public MoviesExtendedDetails getMovieById(Long id) {
         Movie movie = movieRepository.findById(id).orElse(null);
         Poster poster = posterRepository.findById(id).orElse(null);
-        List<ActorDetails> actors = actorRepository.findByMovieId(id);
-        List<String> languages = new ArrayList<>();
+        List<ActorDetails> actors = actorRepository.findByFilmId(id);
+        Set<String> languages = new java.util.HashSet<>();
 
         if (movie != null && movie.getLanguages() != null) {
             languages = movie.getLanguages().stream()
-                    .map(Language::getLanguage) // Prende solo il nome della lingua
-                    .collect(Collectors.toList());
+                    .map(Language::getLanguage)
+                    .collect(Collectors.toSet());
         }
         if (movie != null) {
             assert poster != null;

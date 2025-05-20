@@ -1,6 +1,7 @@
 package com.bissallombardozzi.springbootserver.Oscars;
 
 import com.bissallombardozzi.springbootserver.Dto.OscarEditionDetails;
+import com.bissallombardozzi.springbootserver.Dto.OscarEditionInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -65,5 +66,22 @@ public class OscarService {
         details.setNominations(nominations);
         details.setWinners(winners);
         return details;
+    }
+
+    public List<OscarEditionInfo> get5LatestEditions() {
+        List<Oscar> oscars = oscarRepository.findTop5CeremonyDistinctOrderByYearCeremonyDesc();
+        List<OscarEditionInfo> editions = new ArrayList<>();
+
+        System.out.println("Oscars: " + oscars);
+
+        for(Oscar oscar : oscars) {
+            OscarEditionInfo editionInfo = new OscarEditionInfo();
+            editionInfo.setEdition(oscar.getCeremony());
+            editionInfo.setYear(oscar.getYearCeremony());
+            editionInfo.setNumberOfWinners((int) oscars.stream().filter(Oscar::getWinner).count());
+            editions.add(editionInfo);
+        }
+
+        return editions;
     }
 }
