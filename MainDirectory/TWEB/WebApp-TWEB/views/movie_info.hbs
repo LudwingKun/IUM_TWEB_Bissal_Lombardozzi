@@ -4,11 +4,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body class="bg-dark text-light">
+<body class="bg-dark text-light position-relative">
+<div class="position-sticky top-0 end-0 p-3" style="z-index: 1000;">
+    <a href="/" class="btn btn-light btn-lg">🏠</a>
+</div>
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-4">
-            <img src="{{#if movie.posterUrl}}{{movie.posterUrl}}{{else}}/images/question-mark.png{{/if}}" class="img-fluid rounded" alt="{{movie.title}}">
+            <img src="{{#if movie.posterUrl}}{{movie.posterUrl}}{{else}}/images/question-mark.png{{/if}}"
+                 class="img-fluid rounded" alt="{{movie.title}}">
         </div>
         <div class="col-md-8">
             <h2 class="text-warning">{{movie.title}} ({{movie.releaseDate}})</h2>
@@ -17,7 +21,8 @@
             <br>
             <p class="mb-2"><span class="fw-semibold text-warning">Rating:</span> {{movie.rating}}</p>
             <p><span class="fw-semibold text-warning">Duration:</span> {{movie.duration}}'</p>
-            <p><span class="fw-semibold text-warning">Language:</span> {{movie.languages}}</p>
+            <p><span class="fw-semibold text-warning">Language:</span>{{movie.languages}}
+            </p>
             <p><span class="fw-semibold text-warning">Genres:</span>
                 {{#each movie.genres}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}
             </p>
@@ -26,7 +31,8 @@
     </div>
 
     <div class="mt-4 text-end">
-        <button class="btn btn-warning ms-auto me-2" onclick="window.location.href='/reviews?movie_title={{encodeURI movie.title}}'" style="cursor: pointer;">Reviews</button>
+        <button class="btn btn-warning ms-auto me-2" onclick="window.location.href='/reviews?movie_title={{encodeURI
+            movie.title}}'" style="cursor: pointer;">Reviews</button>
     </div>
 
     <div class="mt-5">
@@ -34,7 +40,8 @@
         <ul class="list-group list-group-flush">
             {{#each movie.actors}}
                 <li class="list-group-item bg-secondary text-white">
-                    {{this.name}} as {{#if this.role}}{{this.role}}{{else}}<span style="font-style: italic">Unknown</span>{{/if}}
+                    {{this.name}} as {{#if this.role}}{{this.role}}{{else}}
+                    <span style="font-style: italic">Unknown</span>{{/if}}
                 </li>
             {{/each}}
 

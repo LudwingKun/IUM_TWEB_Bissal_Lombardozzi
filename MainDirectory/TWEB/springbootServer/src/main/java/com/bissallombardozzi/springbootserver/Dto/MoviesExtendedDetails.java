@@ -1,12 +1,11 @@
 package com.bissallombardozzi.springbootserver.Dto;
 
-import com.bissallombardozzi.springbootserver.Actor.Actor;
 import com.bissallombardozzi.springbootserver.Genres.Genre;
+import com.bissallombardozzi.springbootserver.Language.Language;
 import com.bissallombardozzi.springbootserver.Movie.Movie;
 import com.bissallombardozzi.springbootserver.Poster.Poster;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class MoviesExtendedDetails {
@@ -20,10 +19,10 @@ public class MoviesExtendedDetails {
     private List<String> languages;
     private String posterUrl;
     private List<ActorDetails> actors;
-    private float rating;
+    private Double rating;
 
 
-    public MoviesExtendedDetails(Movie m, Poster p, List<ActorDetails> actors) {
+    public MoviesExtendedDetails(Movie m, Poster p, List<ActorDetails> actors, List<String> languages) {
         this.id = m.getId();
         this.title = m.getFilmName();
         this.description = m.getFilmDescription();
@@ -31,6 +30,7 @@ public class MoviesExtendedDetails {
         this.rating = m.getFilmRating();
         this.tagline = m.getFilmTagline();
         this.duration = m.getFilmDuration();
+        this.languages = languages;
 
         if (m.getGenres() == null) {
             this.genres = List.of();
@@ -72,8 +72,6 @@ public class MoviesExtendedDetails {
     public List<String> getGenres() { return genres; }
     public void setGenres(List<String> genres) { this.genres = genres; }
 
-    public List<String> getLanguages() { return languages; }
-    public void setLanguages(List<String> languages) { this.languages = languages; }
 
     public String getPosterUrl() { return posterUrl; }
     public void setPosterUrl(String posterUrl) { this.posterUrl = posterUrl; }
@@ -83,6 +81,15 @@ public class MoviesExtendedDetails {
         this.actors = actors;
     }
 
-    public float getRating() { return rating; }
-    public void setRating(float rating) { this.rating = rating; }
+    public Double getRating() { return rating; }
+
+    public List<String> getLanguages() {
+        return languages;
+    }
+
+    public void setLanguages(List<String> languages) {
+        this.languages = languages;
+    }
+
+    public void setRating(Double rating) { this.rating = rating; }
 }

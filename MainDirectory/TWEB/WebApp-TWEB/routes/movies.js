@@ -19,8 +19,8 @@ router.get('/', async (req, res) => {
  * for filtred movies
  */
 router.get('/movies', async (req, res) => {
-    let { filmName, filmDate, rating, genre, page = 0, sort } = req.query;
-
+    let { filmName, filmDate, rating, genre, page = 0, sort, order } = req.query;
+    console.log('sort:', sort, "and order:", order);
     filmName = cleanParam(filmName);
     filmDate = cleanParam(filmDate);
     rating = cleanParam(rating);
@@ -29,10 +29,10 @@ router.get('/movies', async (req, res) => {
 
     try {
         const response = await axios.get('http://localhost:8082/movies/search', {
-            params: {filmName, filmDate, rating, genre, page, limit: 50}
+            params: {filmName, filmDate, rating, genre, sort, order, page,  limit: 50}
         });
-        console.log('Dati ricevuti da Spring Boot:', response.data);
-
+        /**attivare solo se necessario per TEST**/
+       // console.log('Dati ricevuti da Spring Boot:', response.data);
         res.render('search', {
             movies: response.data,
             currentPage: Number(response.data.page),

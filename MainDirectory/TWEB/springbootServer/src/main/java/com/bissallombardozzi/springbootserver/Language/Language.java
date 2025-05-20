@@ -1,18 +1,29 @@
 package com.bissallombardozzi.springbootserver.Language;
+import com.bissallombardozzi.springbootserver.Movie.Movie;
 import jakarta.persistence.*;
+
+import java.util.Set;
+
 @Entity
 @Table(name="languages")
 public class Language {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "type")
     private String type;
-
-    @Column(name = "language")
     private String language;
+
+    @ManyToMany(mappedBy = "languages")
+    private Set<Movie> movies;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getType() {
         return type;
@@ -30,7 +41,11 @@ public class Language {
         this.language = language;
     }
 
-    public Long getId() {
-        return id;
+    public Set<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(Set<Movie> movies) {
+        this.movies = movies;
     }
 }

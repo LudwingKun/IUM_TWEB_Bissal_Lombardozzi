@@ -31,7 +31,7 @@ public class Movie {
     private String filmDescription;
 
     @Column(name = "rating", nullable = false)
-    private float filmRating;
+    private Double filmRating;
 
     @ManyToMany
     @JoinTable(
@@ -41,20 +41,23 @@ public class Movie {
     )
     private Set<Genre> genres;
 
-//    @ManyToMany
-//    @JoinTable(
-//            name = "languages",
-//            joinColumns = @JoinColumn(name = "id"),
-//            inverseJoinColumns = @JoinColumn(name = "language_id")
-//    )
-//    private Set<Language> languages;
 
 
+    @ManyToMany
+    @JoinTable(
+            name = "movie_languages",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "language_id")
+    )
+    private Set<Language> languages;
+    public Set<Language> getLanguages() {
+        return languages;
+    }
     public Movie() {
 
     }
 
-    public Movie(Long id_film, String filmName, String filmDate, String filmTagline, String filmDuration, String filmDescription, float filmRating) {
+    public Movie(Long id_film, String filmName, String filmDate, String filmTagline, String filmDuration, String filmDescription, Double filmRating) {
         this.id = id_film;
         this.filmName = filmName;
         this.filmDate = filmDate;
@@ -113,11 +116,11 @@ public class Movie {
         this.filmDescription = filmDescription;
     }
 
-    public float getFilmRating() {
+    public Double getFilmRating() {
         return filmRating;
     }
 
-    public void setFilmRating(float filmRating) {
+    public void setFilmRating(Double filmRating) {
         this.filmRating = filmRating;
     }
 

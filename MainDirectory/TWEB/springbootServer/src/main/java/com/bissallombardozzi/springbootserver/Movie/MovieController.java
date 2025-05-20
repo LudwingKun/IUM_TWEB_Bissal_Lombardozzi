@@ -45,46 +45,14 @@ public class MovieController {
             @RequestParam(required = false) String filmDate,
             @RequestParam(required = false) Double rating,
             @RequestParam(required = false) String genre,
+            @RequestParam(required = false) String sort,
+            @RequestParam(required = false) String order,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size) {
 
-        Page<MovieDetails> result = movieService.searchMovies(filmName, filmDate, rating, genre, page, size);
+        Page<MovieDetails> result = movieService.searchMovies(filmName, filmDate, rating, genre,sort, order, page, size);
         return ResponseEntity.ok(new MoviePageDTO(result));
     }
-/*
-    @GetMapping("/search")
-    public List<Movie> searchMovies(
-            @RequestParam(required = false) String title,
-            @RequestParam(required = false) String genre,
-            @RequestParam(required = false) Integer year,
-            @RequestParam(required = false) Double rating,
-            @RequestParam(required = false, defaultValue = "asc") String sort
-    ) {
-
-        return movieRepository.findMoviesByFilters(title, genre, year, rating, sort);
-    }
-*/
-/*
-@GetMapping("/search")
-public ResponseEntity<List<MovieDetails>> searchMovies(
-        @RequestParam(required = false) String title,
-        @RequestParam(required = false) String genre,
-        @RequestParam(required = false) Integer year,
-        @RequestParam(required = false) Double rating,
-        @RequestParam(required = false, defaultValue = "asc") String sort
-) {
-    List<MovieDetails> movies = movieService.searchMovies(title, genre, year, rating, sort);
-
-    if (movies != null && !movies.isEmpty()) {
-        return ResponseEntity.ok(movies);
-    } else {
-        return ResponseEntity.notFound().build();
-    }
-}
-*/
-
-
-
 
     @GetMapping("/top5movies")
     public List<MovieDetails> getTop5Movies() {
@@ -92,10 +60,6 @@ public ResponseEntity<List<MovieDetails>> searchMovies(
     }
 
 
-//    @GetMapping("/movies/{name}")
-//    public List<Movie> getMovieByName(@PathVariable String name) {
-//        return movieService.getMovieByName(name);
-//    }
 
 
 }

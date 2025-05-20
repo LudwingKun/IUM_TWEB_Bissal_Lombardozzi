@@ -14,8 +14,8 @@
 <body>
 <div class="container py-5">
     <h1 class="text-center mb-4 text-warning">Search for Movies</h1>
-    <div class="text-center mb-4">
-        <a href="/" class="btn btn-outline-light btn-lg">🏠 Torna alla Home</a>
+    <div class="position-sticky top-0 end-0 p-3" style="z-index: 1000;">
+        <a href="/" class="btn btn-light btn-lg">🏠</a>
     </div>
     <form id="search-form" class="row g-3 bg-dark p-4 rounded shadow" method="get" action="/movies/movies">
         <div class="col-md-6">
@@ -58,15 +58,35 @@
         </div>
 
         <div class="col-md-4">
-            <label for="sort" class="form-label text-warning">Sort by</label>
-            <select id="sort" class="form-select" name="sort">
-                <option value="">Nessun ordinamento</option>
-                <option value="title">Titolo</option>
-                <option value="year">Anno</option>
-                <option value="rating">Rating</option>
-            </select>
-        </div>
+            <div class="row g-2 align-items-center">
+                <div class="col-auto">
+                    <label for="sort" class="form-label">Sort by:</label>
+                    <select id="sort" class="form-select" name="sort">
+                        <option value="">No particular Order</option>
+                        <option value="filmName">Title</option>
+                        <option value="filmDate">Year</option>
+                        <option value="rating">Rating</option>
+                    </select>
+                </div>
 
+                <div class="col-auto">
+                    <label for="order" class="form-label">Order:</label>
+                    <select id="order" class="form-select" name="order">
+                        <option value="asc">Ascending ↑</option>
+                        <option value="desc">Descending ↓</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <!--<label for="sort" class="form-label text-warning">Sort by</label>
+            <select id="sort" class="form-select" name="sort">
+                <option value="">No particular Order</option>
+                <option value="filmName">Title</option>
+                <option value="filmDate">Year</option>
+                <option value="rating">Rating</option>
+            </select>-->
+        </div>
         <div class="col-12 text-center">
             <button type="submit" class="btn btn-primary px-5">🔍 Search</button>
         </div>
