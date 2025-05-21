@@ -36,3 +36,9 @@ coverage/
 # Temporary files created by the OS or WebStorm
 *.swp
 *.swo
+/additional_data/
+/main_data/
+/DataAnalisis_IUM/notebook/clean_language_data_processor.py
+/DataAnalisis_IUM/notebook/cleaner.ipynb
+/DataAnalisis_IUM/notebook/cleaner.py
+/TWEB/WebApp-TWEB/ConfigurationDB/

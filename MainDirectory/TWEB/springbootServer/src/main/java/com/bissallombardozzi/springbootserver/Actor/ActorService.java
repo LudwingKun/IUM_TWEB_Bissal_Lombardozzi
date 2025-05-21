@@ -2,7 +2,11 @@ package com.bissallombardozzi.springbootserver.Actor;
 
 import com.bissallombardozzi.springbootserver.Dto.ActorExtendedDetails;
 import com.bissallombardozzi.springbootserver.Dto.MovieDetails;
+import com.bissallombardozzi.springbootserver.Dto.OscarToActors;
 import com.bissallombardozzi.springbootserver.Movie.Movie;
+import com.bissallombardozzi.springbootserver.Oscars.Oscar;
+import com.bissallombardozzi.springbootserver.Oscars.OscarRepository;
+import com.bissallombardozzi.springbootserver.Oscars.OscarService;
 import com.bissallombardozzi.springbootserver.Poster.Poster;
 import com.bissallombardozzi.springbootserver.Poster.PosterRepository;
 import org.springframework.web.bind.annotation.*;
@@ -18,10 +22,13 @@ import java.util.stream.Collectors;
 public class ActorService {
     private final ActorRepository actorRepository;
     private final PosterRepository posterRepository;
+    private final OscarRepository oscarRepository;
+    private final OscarService oscarService = new OscarService();
 
-    public ActorService(ActorRepository actorRepository, PosterRepository posterRepository) {
+    public ActorService(ActorRepository actorRepository, PosterRepository posterRepository, OscarRepository oscarRepository) {
         this.actorRepository = actorRepository;
         this.posterRepository = posterRepository;
+        this.oscarRepository = oscarRepository;
     }
 
     public List<Actor> getAllActors() {
@@ -44,7 +51,7 @@ public class ActorService {
         return actorRepository.findByActorName(name);
     }
 
-    public Optional<List<MovieDetails>> getMoviesByActorName(String name) {
+    public Optional<ActorExtendedDetails> getMoviesByActorName(String name) {
         List<Actor> actorRoles = actorRepository.findByActorName(name);
         System.out.println("actorRoles: " + actorRoles);
 
@@ -52,18 +59,19 @@ public class ActorService {
             return Optional.empty();
         }
 
-        // Costruisci la lista di MovieDetails, filtrando eventuali null per sicurezza
         List<MovieDetails> movieDetailsList = actorRoles.stream()
                 .filter(actor -> actor.getMovie() != null) // evita NPE
                 .map(actor -> {
                     Movie movie = actor.getMovie();
                     Poster poster = posterRepository.findById(movie.getId()).orElse(null);
+                    assert poster != null;
                     return new MovieDetails(movie, poster);
                 })
-                .distinct() // se vuoi evitare duplicati di MovieDetails (da attori duplicati)
+                .distinct()
                 .toList();
-
-        return Optional.of(movieDetailsList);
+        List<OscarToActors> oscars = oscarService.convertToOscarToActorsList(oscarRepository.findOscarsByName(name));
+        ActorExtendedDetails actorExtendedDetails = new ActorExtendedDetails(name, oscars.size(), oscars, movieDetailsList);
+        return Optional.of(actorExtendedDetails);
     }
 
 }

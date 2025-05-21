@@ -2,6 +2,7 @@ package com.bissallombardozzi.springbootserver.Oscars;
 
 import com.bissallombardozzi.springbootserver.Dto.OscarEditionDetails;
 import com.bissallombardozzi.springbootserver.Dto.OscarEditionInfo;
+import com.bissallombardozzi.springbootserver.Dto.OscarToActors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class OscarService {
@@ -83,5 +85,16 @@ public class OscarService {
         }
 
         return editions;
+    }
+
+    public List<OscarToActors> convertToOscarToActorsList(List<Oscar> oscars) {
+        return oscars.stream()
+                .map(o -> new OscarToActors(
+                        o.getYearFilm(),
+                        o.getYearCeremony(),
+                        o.getCategoryOscar(),
+                        o.getName()
+                ))
+                .collect(Collectors.toList());
     }
 }

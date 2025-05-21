@@ -1,21 +1,18 @@
 package com.bissallombardozzi.springbootserver.Dto;
 
 import java.util.List;
-import java.util.Map;
 
 public class ActorExtendedDetails {
     private String name;
-    private Map<String, String> rolesPlayed;
     private int numberOfOscars;
-    private List<String> oscarAwards;
+    private List<OscarToActors> oscarAwards;
     private List<MovieDetails> movies;
 
     public ActorExtendedDetails() {
     }
 
-    public ActorExtendedDetails(String name, Map<String, String> rolesPlayed, int numberOfOscars, List<String> oscarAwards,  List<MovieDetails> movies) {
+    public ActorExtendedDetails(String name, int numberOfOscars, List<OscarToActors> oscarAwards,  List<MovieDetails> movies) {
         this.name = name;
-        this.rolesPlayed = rolesPlayed;
         this.numberOfOscars = numberOfOscars;
         this.oscarAwards = oscarAwards;
         this.movies = movies;
@@ -29,14 +26,6 @@ public class ActorExtendedDetails {
         this.name = name;
     }
 
-    public Map<String, String> getRolesPlayed() {
-        return rolesPlayed;
-    }
-
-    public void setRolesPlayed(Map<String, String> rolesPlayed) {
-        this.rolesPlayed = rolesPlayed;
-    }
-
     public int getNumberOfOscars() {
         return numberOfOscars;
     }
@@ -45,11 +34,11 @@ public class ActorExtendedDetails {
         this.numberOfOscars = numberOfOscars;
     }
 
-    public List<String> getOscarAwards() {
+    public List<OscarToActors> getOscarAwards() {
         return oscarAwards;
     }
 
-    public void setOscarAwards(List<String> oscarAwards) {
+    public void setOscarAwards(List<OscarToActors> oscarAwards) {
         this.oscarAwards = oscarAwards;
     }
 
