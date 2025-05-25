@@ -2,13 +2,6 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-    res.send('respond with a resource');
-});
-
-router.get('/')
-
 router.get('/edition/:edition', async function(req, res, next) {
     try {
         const edition = req.params.edition;

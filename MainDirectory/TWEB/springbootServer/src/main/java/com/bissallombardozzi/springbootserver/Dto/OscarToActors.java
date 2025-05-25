@@ -6,8 +6,8 @@ public class OscarToActors {
     private String category;
     private String nameActor;
 
-    public OscarToActors(int yeatFilm, int yearCeremony, String category, String nameActor) {
-        this.yearFilm = yeatFilm;
+    public OscarToActors(int yearFilm, int yearCeremony, String category, String nameActor) {
+        this.yearFilm = yearFilm;
         this.yearCeremony = yearCeremony;
         this.category = category;
         this.nameActor = nameActor;

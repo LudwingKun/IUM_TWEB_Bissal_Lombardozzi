@@ -1,20 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-
-
-router.get('/', async (req, res) => {
-    try {
-        const response = await axios.get('http://localhost:8082/movies');
-        const movies = response.data;
-        res.render('movies_list', {movies: movies});
-
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Error');
-    }
-});
-
 /**
  * for filtred movies
  */

@@ -31,10 +31,13 @@ public class OscarController {
         return editions;
     }
 
+
     @GetMapping("/year/{year}")
     public ResponseEntity<OscarEditionDetails> getEditionByYear(@PathVariable int year) {
+        System.out.println("Received request for year: " + year);
         OscarEditionDetails details = oscarService.getOscarEditionDetailsByYear(year);
         if (details == null) {
+            System.out.println("No details found for year: " + year);
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(details);

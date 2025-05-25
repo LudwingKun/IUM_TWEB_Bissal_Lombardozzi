@@ -3,7 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+const swaggerUi = require('swagger-ui-express');
+const openApiDocumentation = require('./openapi.json');
 
 var indexRouter = require('./routes');
 var usersRouter = require('./routes/users');
@@ -30,6 +31,7 @@ app.use('/movies', movieRouter);
 app.use('/actors', actorsRouter);
 app.use('/reviews', reviewsRouter);
 app.use('/oscars', oscarsRouter);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiDocumentation));
 
 const hbs = require('hbs');
 

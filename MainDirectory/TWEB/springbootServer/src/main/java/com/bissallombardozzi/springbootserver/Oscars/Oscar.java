@@ -3,7 +3,7 @@ package com.bissallombardozzi.springbootserver.Oscars;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "oscars_awards")
+@Table(name = "oscar_awards")
 public class Oscar {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
