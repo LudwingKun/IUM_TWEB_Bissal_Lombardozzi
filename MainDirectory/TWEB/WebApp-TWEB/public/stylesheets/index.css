@@ -1,0 +1,39 @@
+:root {
+    --mustard: #FFCC00;
+    --dark: #000000;
+}
+
+body {
+    background-color: var(--dark);
+    color: white;
+}
+
+.navbar {
+    background-color: var(--mustard);
+}
+
+.navbar-brand,
+.nav-link {
+    color: black !important;
+    font-weight: bold;
+}
+
+.section-title {
+    color: var(--mustard);
+    margin-top: 2rem;
+    border-bottom: 2px solid var(--mustard);
+    padding-bottom: 0.5rem;
+}
+
+.card {
+    background-color: #1c1c1c;
+    border: 1px solid var(--mustard);
+}
+
+.card-title {
+    color: var(--mustard);
+}
+
+.card-text {
+    color: white;
+}

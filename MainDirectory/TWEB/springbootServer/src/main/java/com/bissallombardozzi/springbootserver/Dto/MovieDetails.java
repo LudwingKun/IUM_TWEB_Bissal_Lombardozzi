@@ -16,7 +16,11 @@ public class MovieDetails {
         this.posterUrl = poster.getLink();
         this.releaseDate = movie.getFilmDate();
         this.tagline = movie.getFilmTagline();
-        this.rating = movie.getFilmRating();
+        if(movie.getFilmRating() != null) {
+            this.rating = Math.round(movie.getFilmRating() * 100.0) / 100.0;
+        } else {
+            this.rating = null; // Default value if rating is null
+        }
     }
 
     public Long getId() {

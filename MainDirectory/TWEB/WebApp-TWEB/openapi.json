@@ -582,7 +582,7 @@
                   },
                   "publisher_name" : {
                     "type": "string",
-                    "description": "The name of the publisher of the review",
+                    "description": "The name of the publisher of the review"
                   },
                   "review_date" : {
                     "type": "string",

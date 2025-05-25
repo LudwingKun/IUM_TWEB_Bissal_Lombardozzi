@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Review = require('../models/reviews');
 
-// Route: GET /reviews?movie_title=NomeDelFilm
 router.get('/', async (req, res) => {
     const movieTitle = req.query.movie_title;
 

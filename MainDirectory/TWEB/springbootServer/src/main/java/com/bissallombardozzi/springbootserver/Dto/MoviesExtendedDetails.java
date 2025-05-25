@@ -28,10 +28,15 @@ public class MoviesExtendedDetails {
         this.title = m.getFilmName();
         this.description = m.getFilmDescription();
         this.releaseDate = m.getFilmDate();
-        this.rating = m.getFilmRating();
         this.tagline = m.getFilmTagline();
         this.duration = m.getFilmDuration();
         this.languages = languages;
+
+        if (m.getFilmRating() != null) {
+            this.rating = Math.round(m.getFilmRating() * 100.0) / 100.0;
+        } else {
+            this.rating = null;
+        }
 
         if (m.getGenres() == null) {
             this.genres = List.of();
