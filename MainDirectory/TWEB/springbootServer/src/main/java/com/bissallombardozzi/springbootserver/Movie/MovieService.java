@@ -63,19 +63,6 @@ public class MovieService {
     }
 
 
-/*
-    public List<Movie> searchMovies(String genre, Integer year) {
-        Pageable pageable = PageRequest.of(0, 20);
-        return movieRepository.findMoviesByGenreAndYear(genre, year, pageable);
-    }
-*/
-
-    /*
-        public List<MovieDetails> searchMovies(String filmName, Integer filmDate, Double rating, String genre) {
-            List<Movie> movies = movieRepository.findMovies(filmName, filmDate, rating, genre);
-            return getMovieDetails(movies);
-        }
-    */
     private List<MovieDetails> getMovieDetails(List<Movie> movies) {
         List<MovieDetails> movieDetailsList = new ArrayList<>();
         for (Movie movie : movies) {
