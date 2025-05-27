@@ -70,6 +70,7 @@ public class ActorService {
                 .distinct()
                 .toList();
         List<OscarToActors> oscars = oscarService.convertToOscarToActorsList(oscarRepository.findOscarsByName(name));
+        System.out.println("oscars: " + oscars.toString());
         ActorExtendedDetails actorExtendedDetails = new ActorExtendedDetails(name, oscars.size(), oscars, movieDetailsList);
         return Optional.of(actorExtendedDetails);
     }

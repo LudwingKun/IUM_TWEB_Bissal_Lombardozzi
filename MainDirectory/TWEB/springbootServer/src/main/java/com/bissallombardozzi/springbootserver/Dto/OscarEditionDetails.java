@@ -7,7 +7,7 @@ public class OscarEditionDetails {
     private int edition;
     private int year;
     private Map<String, String> nominations;
-    private List<String> winners;
+    private Map<String, String> winners;
 
     public int getEdition() {
         return edition;
@@ -33,11 +33,11 @@ public class OscarEditionDetails {
         this.nominations = nominations;
     }
 
-    public List<String> getWinners() {
+    public Map<String,String> getWinners() {
         return winners;
     }
 
-    public void setWinners(List<String> winners) {
+    public void setWinners(Map<String,String> winners) {
         this.winners = winners;
     }
 }

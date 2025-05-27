@@ -56,7 +56,11 @@
                             {{#each movies}}
                                 <div class="col">
                                     <div class="card h-100 bg-secondary text-white">
-                                        <img src="{{posterUrl}}" class="card-img-top" alt="{{title}}">
+                                        {{#if this.posterUrl}}
+                                            <img src="{{this.posterUrl}}" class="card-img-top" alt="{{this.title}}">
+                                        {{else}}
+                                            <img src="../public/images/question-mark.png" class="card-img-top" alt="Poster non disponibile" style="object-fit: cover; width: 100%; height: 100%;">
+                                        {{/if}}
                                         <div class="card-body">
                                             <h5 class="card-title">{{title}} ({{releaseDate}})</h5>
                                             <p class="card-text" style="font-style: italic;">{{tagline}}</p>

@@ -30,12 +30,12 @@ public class OscarService {
         details.setEdition(oscars.get(0).getCeremony());
 
         Map<String, String> nominations = new LinkedHashMap<>();
-        List<String> winners = new ArrayList<>();
+        Map<String, String> winners = new LinkedHashMap<>();
 
         for (Oscar oscar : oscars) {
             nominations.put(oscar.getName(), oscar.getMovieName());
             if (oscar.getWinner()) {
-                winners.add(oscar.getName() + " - " + oscar.getCategoryOscar());
+                winners.put(oscar.getName(), oscar.getCategoryOscar());
             }
         }
 
@@ -48,7 +48,7 @@ public class OscarService {
         List<Oscar> oscars = oscarRepository.findByCeremony(edition);
 
         if (oscars == null || oscars.isEmpty()) {
-            return null; //
+            return null;
         }
 
         OscarEditionDetails details = new OscarEditionDetails();
@@ -56,12 +56,12 @@ public class OscarService {
         details.setEdition(edition);
 
         Map<String, String> nominations = new LinkedHashMap<>();
-        List<String> winners = new ArrayList<>();
+        Map<String, String> winners = new LinkedHashMap<>();
 
         for (Oscar oscar : oscars) {
             nominations.put(oscar.getName(), oscar.getMovieName());
             if (oscar.getWinner()) {
-                winners.add(oscar.getName() + " - " + oscar.getCategoryOscar());
+                winners.put(oscar.getName(), oscar.getCategoryOscar());
             }
         }
 

@@ -17,7 +17,12 @@
                     <li>
                         <div class="card bg-dark text-white mb-3">
                             <div class="card-body">
-                                <p class="card-text">{{this}}</p>
+                                <p class="card-text">
+                                    <a href="/actors/{{@key}}" class="text-white text-decoration-none">
+                                        <span class="text-warning">{{@key}}</span> for <span>{{#if this}}{{this}}{{else}}
+                                        Unknown{{/if}}</span>
+                                    </a>
+                                </p>
                             </div>
                         </div>
                     </li>
@@ -33,8 +38,10 @@
                         <div class="card bg-dark text-white mb-3">
                             <div class="card-body">
                                 <p class="card-text">
-                                    <span class="text-warning">{{@key}}</span>
-                                    {{#if this}} in <span style="font-style: italic">{{this}}</span>{{/if}}
+                                    <a href="/actors/{{@key}}" class="text-white text-decoration-none">
+                                        <span class="text-warning">{{@key}}</span> in <span style="font-style: italic">{{#if this}}{{this}}{{else}}
+                                        Unknown{{/if}}</span>
+                                    </a>
                                 </p>
                             </div>
                         </div>

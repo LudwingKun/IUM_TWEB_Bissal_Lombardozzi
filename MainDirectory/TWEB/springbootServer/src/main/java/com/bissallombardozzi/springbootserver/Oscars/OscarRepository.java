@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface OscarRepository extends JpaRepository<Oscar, Long> {
 
-    @Query("SELECT o FROM Oscar o WHERE LOWER(o.castMemberName) = LOWER(:name)" +
+    @Query("SELECT DISTINCT o FROM Oscar o WHERE LOWER(o.castMemberName) = LOWER(:name)" +
             " and o.winner =TRUE ")
     List<Oscar> findOscarsByName(@Param("name") String name);
 
