@@ -6,13 +6,12 @@ var axios = require('axios');
 /* GET home page. */
 router.get('/', async function(req, res, next) {
     try {
-        const movies = await axios.get('http://localhost:8082/movies/top5movies');
-        const topMovies = movies.data;
-        const oscars = await axios.get('http://localhost:8082/oscars/latest5');
-        const latestOscars = oscars.data;
-        const random_movies = await axios.get('http://localhost:8082/movies/random5movies');
-        const suggestedMovies = random_movies.data;
-        console.log('randomMovies:', suggestedMovies);
+        const index_data = await axios.get('http://localhost:8082/index-data');
+        console.log('Index data:', index_data.data);
+        const topMovies = index_data.data.bestMovies || [];
+        const suggestedMovies = index_data.data.suggestedMovies || [];
+        const latestOscars = index_data.data.last5editions || [];
+
         res.render('index', { title: 'MovieHub', topMovies: topMovies , latestOscars: latestOscars, suggestedMovies: suggestedMovies});
     } catch (error) {
         console.error('Error:', error);
