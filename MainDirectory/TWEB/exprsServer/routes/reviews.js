@@ -5,7 +5,7 @@ const Review = require('../models/reviews');
 router.get('/', async (req, res) => {
     const movieTitle = req.query.movie_title;
 
-    console.log('Queryyyy:', movieTitle);
+    //console.log('Queryyyy:', movieTitle);
     if (!movieTitle) {
         return res.status(400).json({ message: 'Parametro movie_title mancante' });
     }

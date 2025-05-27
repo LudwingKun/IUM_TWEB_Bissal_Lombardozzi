@@ -2,8 +2,7 @@ const express = require('express');
 const axios = require('axios');
 
 const app = express();
-const port = 3002; // Porta del tuo server Express
-
+const port = 3002;
 // Endpoint per recuperare i film
 app.get('/api/movies', async (req, res) => {
     const { year, ratingMin, limit } = req.query;
