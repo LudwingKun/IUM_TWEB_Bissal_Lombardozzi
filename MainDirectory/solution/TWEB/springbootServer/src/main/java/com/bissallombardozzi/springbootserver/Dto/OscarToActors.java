@@ -5,12 +5,14 @@ public class OscarToActors {
     private int yearCeremony;
     private String category;
     private String nameActor;
+    private String nameFilm;
 
-    public OscarToActors(int yearFilm, int yearCeremony, String category, String nameActor) {
+    public OscarToActors(int yearFilm, int yearCeremony, String category, String nameActor,String nameFilm) {
         this.yearFilm = yearFilm;
         this.yearCeremony = yearCeremony;
         this.category = category;
         this.nameActor = nameActor;
+        this.nameFilm = nameFilm;
     }
 
     public int getYearFilm() {
@@ -19,6 +21,10 @@ public class OscarToActors {
 
     public int getYearCeremony() {
         return yearCeremony;
+    }
+
+    public String getNameFilm() {
+        return nameFilm;
     }
 
     public String getCategory() {

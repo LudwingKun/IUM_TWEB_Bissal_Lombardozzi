@@ -93,7 +93,8 @@ public class OscarService {
                         o.getYearFilm(),
                         o.getYearCeremony(),
                         o.getCategoryOscar(),
-                        o.getName()
+                        o.getName(),
+                        o.getMovieName()
                 ))
                 .collect(Collectors.toList());
     }
